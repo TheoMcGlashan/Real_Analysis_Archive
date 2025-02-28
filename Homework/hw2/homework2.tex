@@ -1,0 +1,150 @@
+\documentclass[12pt]{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\title{Homework 2}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+\newpage
+\
+\newpage
+
+\subsection*{2B.12}
+
+Let $f : \mathbb{R} \to \mathbb{R}$ be a function.
+
+\begin{itemize}
+    \item[a.] For $k \in \mathbb{Z}^+$, let $$G_k = \{ a \in \mathbb{R} : \text{there exists}~ \delta > 0 ~\text{such that}~ |f(b) - f(c)| < \frac{1}{k} ~\text{for all}~ b,c \in (a - \delta, a + \delta)\}$$
+    $Claim.$ $G_k$ is an open subset of $\mathbb{R}$ for each $k \in \mathbb{Z}^+$.
+
+    \begin{proof}
+        Fix $k \in \mathbb{Z}^+$, then take $g \in G_k$. Then $g \in \mathbb{R}$ and there exists $\delta > 0$ such that $$|f(b) - f(c)| < \frac{1}{k}$$ for all $b,c \in (g - \delta, g + \delta)$. To show $G_k$ is open, take $g' \in (g - \delta, g + \delta)$. Then there exists $\delta'$ such that $$(g' - \delta', g' + \delta') \subseteq (g - \delta, g + \delta).$$ Then $|f(b) - f(c)| < \frac{1}{k}$ for all $b,c \in (g' - \delta', g' + \delta')$, so $g' \in G_k$. Thus $G_k$ is open.
+    \end{proof}
+
+    \item[b.] $Claim.$ The set of points at which $f$ is continuous equals $\bigcap_{k=1}^\infty G_k$.
+    
+    \begin{proof}
+        To show one side of the equality, take $x \in \bigcap_{k=1}^\infty G_k$. Then for any $\epsilon > 0$, there exists $k \in \mathbb{Z}^+$ such that $\frac{1}{k} < \epsilon$. Then there exists $\delta > 0$ such that $$|f(b) - f(c)| < \frac{1}{k} < \epsilon$$ for all $b,c \in (x - \delta, x + \delta)$. Thus $f$ is continuous at $x$.
+
+        To show the other side of the equality, take $x \in \mathbb{R}$ such that $f$ is continuous at $x$. Then for any $k \in \mathbb{Z}^+$, there exists $\delta > 0$ such that $$|f(b) - f(c)| < \frac{1}{k}$$ for all $b, c \in (x - \delta, x + \delta)$. Therefore for all $k \in \mathbb{Z}^+$, $x \in G_k$, so $x \in \bigcup_{k=1}^\infty G_k$. This completes the other side of our equality, so the set of points at which $f$ is continuous equals $\bigcap_{k=1}^\infty G_k$.
+    \end{proof}
+
+    \newpage
+
+    \item[c.] $Claim.$ The set of points at which $f$ is continuous is a boreal set.
+    
+    \begin{proof}
+        Each $G_k$ is open, so each $G_k$ is a boreal set. Also, the set of boreal sets is a $\sigma$-algebra. Because $\sigma$-algebras are closed under countable intersections, $\bigcap_{k=1}^\infty G_k$ is a boreal set. Therefore the set of points at which $f$ is continuous is a boreal set.
+    \end{proof}
+\end{itemize}
+
+\subsection*{2B.14}
+
+\begin{itemize}
+    \item[a.] Let $f_1, f_2,\ldots$ be a sequence of functions from a set $X$ to $\mathbb{R}$.
+    
+    $Claim.$
+    \begin{align*}
+        & \{x \in X : \text{the sequence}~ f_1(x), f_2(x), \ldots ~\text{has a limit in}~ \mathbb{R}\} \\
+        &= \bigcap_{n=1}^\infty \bigcup_{j=1}^\infty \bigcap_{k=j}^\infty (f_j - f_k)^{-1}((-\frac{1}{n}, \frac{1}{n})).
+    \end{align*}
+    
+    To see why this is true, first fix $n \in \mathbb{N}$, and then take $j \in \mathbb{N}$ and $k \in \mathbb{N}$ with $k \geq j$. Then observe that $(f_j - f_k)^{-1}((-\frac{1}{n}, \frac{1}{n}))$ is the set of $x \in X$ such that $|f_j - f_k| < \frac{1}{n}$. Call this property $P$. Then, take the intersection of that set over all $k \geq j$, leaving $n$ and $j$ fixed. This results in all $x \in X$ that have property $P$ for all $k \geq j$.Then take the union of this new set over all $j \in \mathbb{N}$. This results in all $x \in X$ that, for any $j$, have property $P$ for all $k \geq j$. Finally, take the intersection of this most recent set over all $n \in \mathbb{N}$. This results in the set of all $x \in X$ such that for all $n$, there exists some $j$ such that for all $k \geq j$, we know $|f_j - f_k| < \frac{1}{n}$. But this is equivalent to the cauchy criterion for convergence of a sequence, so this is the set of all $x \in X$ such that the sequence $f_1(x), f_2(x), \ldots$ has a limit in $\mathbb{R}$.
+
+    \item[b.] We know from part a. that
+    \begin{align*}
+        & \{x \in X : \text{the sequence}~ f_1(x), f_2(x), \ldots ~\text{has a limit in}~ \mathbb{R}\} \\
+        &= \bigcap_{n=1}^\infty \bigcup_{j=1}^\infty \bigcap_{k=j}^\infty (f_j - f_k)^{-1}((-\frac{1}{n}, \frac{1}{n})).
+    \end{align*}
+    Then because each $f_i$ is $\sigma$-measurable for all $i \in \mathbb{N}$, we know that $f_j - f_k$ is $\sigma$-measurable for all $k$ and $j$. Then because $(-\frac{1}{n}, \frac{1}{n})$ is a boreal set for all $n \in \mathbb{N}$, we know that $(f_j - f_k)^{-1} (-\frac{1}{n}, \frac{1}{n})$ is $\sigma$-measurable. Then because the $\sigma$-algebra is closed under countable unions and intersections,$$\bigcap_{n=1}^\infty \bigcup_{j=1}^\infty \bigcap_{k=j}^\infty (f_j - f_k)^{-1}((-\frac{1}{n}, \frac{1}{n})).$$ is $\sigma$-measurable.
+\end{itemize}
+
+\subsection*{Additional Problem 1}
+
+$theorem.$ Let $O \subseteq \mathbb{R}$ be a non-empty, open set. Then, there exists a countable collection of pairwise disjoint open intervals $I_n$, $n \in \mathbb{N}$, such that $$O = \bigsqcup_{n=1}^\infty I_n$$
+
+\begin{itemize}
+    \item[a.] For $q \in \mathbb{Q} \cap O$, define 
+    \begin{align*}
+        \alpha(Q) := \inf\{ x \in \mathbb{R} : (x, q] \subseteq O\} \\
+        \beta(q) := \sup\{ x \in \mathbb{R} : [q, x) \subseteq O\}
+    \end{align*}
+    We know there exists $q \in \mathbb{Q} \cap O$ because $O$ is open, and nonempty, so it contains infinitely many rationals. Then, also because $O$ is open, we know that there exists $\epsilon > 0$ such that $(q - \epsilon, q + \epsilon) \subseteq O$. Then, by definition of the infimum and supremum, $$\inf \{ x \in \mathbb{R} : (x,q] \subseteq O\} \leq q-\epsilon < q + \epsilon \leq \sup \{x \in \mathbb{R} : [q,x) \subseteq O\}$$
+
+    \item[b.] For $q \in \mathbb{Q} \cap O$, if $I_q := (\alpha(q), \beta(q))$, then $I_q \subseteq O$.
+    
+    \begin{proof}
+        Take $x \in I_q$. Then $\alpha(q) < x < \beta(q)$. If $x \leq q$, then $x \in (\alpha(q), q] \subseteq O$. If $x > q$, then $x \in [q, \beta (q)) \subseteq O$. Therefore $I_q \subseteq O$.
+    \end{proof}
+
+    \item[c.] $Claim.$ $\bigcup_{q \in \mathbb{Q} \cap O} I_q = O$ and for all $q, s \in \mathbb{Q} \cap O$, either $I_q = I_s$ or $I_q \cap I_s = \emptyset$.
+    
+    \begin{proof}
+        To show the first part of the claim, first note that we have half of the equality from the fact that each $I_q$ is a subset of $O$. Then take $x \in O$. If $x$ is irrational, then because $O$ is open we can take a rational from the open neighborhood of $x$ that will be in $O$. Therefore we can assume $x \in \mathbb{Q}$. Then there exists $I_x = (\alpha(x), \beta(x))$ such that $x \in I_x$. Then because $I_x \subseteq \bigcup_{q \in \mathbb{Q} \cap O} I_q$, we have $x \in \bigcup_{q \in \mathbb{Q} \cap O} I_q$. Therefore the first part of the claim is true.
+
+        For the second part, take $q, s \in \mathbb{Q} \cap O$. Then if $I_q \cap I_s \neq \emptyset$, there exists $x \in I_q \cap I_s$. Thus both $\alpha(q) < x < \beta(q)$ and $\alpha(s) < x < \beta(s)$. But then by the definition of $\alpha$ and $\beta$, we know that $\alpha(q) = \alpha(s)$ and $\beta(q) = \beta(s)$. Therefore $I_q = I_s$. This completes the proof of the second part of the claim.
+    \end{proof}
+
+    \item[d.] These parts together prove our theorem. To see this, form a sub-collection of our $I_q$s's where $I_q \cap I_s = \emptyset$ for any two elements $I_q$ and $I_s$ in our sub-collection. The union of these $I_q$'s is still $O$, and they are now all disjoint from each other. Therefore we have found a countable collection of pairwise disjoint open intervals that cover $O$.
+\end{itemize}
+
+\subsection*{Additional Problem 2}
+
+Let $(X, \mathcal{S}, \mu)$ be a measure space. $\mu$ is a finite measure if $\mu(X) \leq +\infty$. $\mu$ is a $\sigma$-finite measure if there exists a countable collection $\{ X_n, n \in \mathbb{N}\}$ of measurable sets such that \begin{align}
+    X = \bigcup_{n \in \mathbb{N}} X_n \text{, and } \mu(X_n) \leq +\infty \text{, for all } n \in \mathbb{N} \label{eq:1}
+\end{align}
+\begin{itemize}
+    \item[a.] Let $(X, \mathcal{S}, \mu)$ be $\sigma$-finite.
+    
+    $claim.$ Without loss of generality, one may assume the collection $\{ X_n, n \in \mathbb{N}\}$ of measurable sets in \eqref{eq:1} to be mutually disjoint.
+
+    \begin{proof}
+        For the collection $\{X_n, n \in \mathbb{N}\}$, inductively define a new collection $\{Y_n, n \in \mathbb{N}\}$, where $Y_1 = X_1$ and $Y_n = X_n \setminus Y_{n-1}$. It follows from this definition that all the $Y_n$'s are mutually disjoint, and that $$X = \bigcup_{n \in \mathbb{N}} Y_n \text{, and } Y_n = X_n \cap (X \setminus \bigcup_{k=1}^{n-1} X_k)$$ The alternative definition of $Y_n$ above shows that $Y_n$ is $\sigma$-measurable for all $n \in \mathbb{N}$ because $\sigma$-measurability is closed with respect to countable union, intersection, and complementation. Therefore we can assume the collection $\{X_n, n \in \mathbb{N}\}$ of measurable sets in \eqref{eq:1} to be mutually disjoint because if it is not, we can form a new collection that is that satisfies all of our desired properties.
+    \end{proof}
+
+    \item[b.] Assume that $\mu$ is $\sigma$-finite, and $\mathcal{C}$ is a collection of pairwise disjoint measurable sets which have strictly positive measure.
+    
+    $claim.$ The collection $\mathcal{C}$ is at most countable.
+
+    \begin{proof}
+        First, assume that $\mu$ is a finite measure (not just $\sigma$-finite). Then, assume for contradiction that $C$ is uncountable and consider the collection $$\mathcal{A}_n := \{A \in \mathcal{C} : \mu(A) \geq \frac{1}{n} \}.$$ Then, because $\mathcal{C}$ is uncountable, there exists some $\mathcal{A}_N$ that is uncountable. Take a countably infinite number of $A_i$'s from $\mathcal{A}_N$. We know that for this $N \in \mathbb{N}$, each $A_i$ has measure at least $\frac{1}{N}$. Using countable aditivity and the definition of finite measure, we can say $$+\infty = \sum_{i=1}^{\infty} \frac{1}{N} \leq \sum_{i=1}^{\infty} \mu(A_i) = \mu \left(\bigcup_{i=1}^\infty A_i \right) \leq \mu(x) \leq +\infty.$$ This contradicts our assumption that $\mathcal{C}$ is uncountable.
+
+        Now, assume that $\mu$ is $\sigma$-finite but not necessarily finite. Then there exists a countable collection $\{X_n, n \in \mathbb{N}\}$ of pairwise disjoint, measurable sets as defined in \eqref{eq:1}. Then, for each $n \in \mathbb{N}$, form the measure space $(X, \mathcal{S}_n, \mu_n)$ where $\mathcal{S}_n$ is the $\sigma$-algebra generated by $\mathcal{S}$ on $X_n$ and $\mu_n$ is the restriction of $\mu$ to $\mathcal{S}_n$. Then $\mu_n$ is a finite measure for all $n \in \mathbb{N}$ by the definition of $\sigma$-finiteness.
+
+        Next, we must separate each set in $\mathcal{C}$ into some $X_n$. To do this, we will have to modifyt $\mathcal{C}$, as any given set in $\mathcal{C}$ may not fit entirely into any $X_n$. If this is the case for some $C \in \mathcal{C}$, then we can split $C$ into the parts of $C$ that are in each $X_n$. Because all $X_n$'s are disjoint, no parts of $C$ will be in more than one of them. This modification of $\mathcal{C}$ can split each $C \in \mathcal{C}$ into at most countably many parts, so the whole collection $\mathcal{C}$ cannot become uncountable because of this modification.
+
+        Finally, for each $X_n$, the subset of $\mathcal{C}$ that is in $X_n$ is a collection of pairwise disjoint measurable sets with strictly positive measure and $\mu_n$ is a finite measure, so by the previous part of this proof, this subset of $\mathcal{C}$ is at most countable. Because there are countably many $X_n$, the whole collection $\mathcal{C}$ is at most countable.
+
+        \item[c.] For a measure space$(X, \mathcal{S}, \mu)$, a point $x \in X$ is an atom if $\{x\} \in \mathcal{S}$ and $\mu(\{x\}) > 0$.
+        
+        $claim.$ If $\mu$ is $\sigma$-finite, then there can be at most countably many atoms.
+
+        \begin{proof}
+            This claim follows from part (b), as the collection of atoms is clearly a collection of pairwise disjoint measurable sets with strictly positive measures. Therefore this collection is at most countable, so there can be at most countably many atoms.
+        \end{proof}
+    \end{proof}
+\end{itemize}
+
+\subsection*{2C.2}
+
+Let $\mu$ be a measure on $(\mathbb{Z}^+, 2^{\mathbb{Z^+}})$.
+
+$claim.$ There exists a sequence $w_1, w_2 \ldots$ in $[0,1]$ such that $$\mu(E) = \sum_{k \in E} w_k$$ for every set $E \subseteq \mathbb{Z}^+$.
+
+\begin{proof}
+    Let $E = \{x_1, x_2, \ldots\}$ for $x_i \in \mathbb{Z}^+$. Then countable aditivity tells us that $$\mu(E) = \mu \left(\bigcup_{n \in \mathbb{N}} {x_n} \right) = \sum_{n \in \mathbb{N}} \mu(\{x_k\}).$$ Letting $w_i = x_i$ for all $i \in \mathbb{N}$, we have that $$\mu(E) = \sum_{n \in \mathbb{N}} w_k.$$
+\end{proof}
+
+\subsection*{2C.3}
+
+An example of a measure $\mu$ on $(\mathbb{Z}^+, 2^{\mathbb{Z^+}})$ such that $$\{ \mu(E) : E \subseteq \mathbb{Z}^+ \} = [0,1]$$ is the measure defined by $$\mu(E) = \lim_{n \to \infty} \frac{1}{n} \sum_{k=1}^{n} \chi_E(k)$$ where $\chi_E$ is the characteristic function of $E$. This function attains all points in $[0,1]$ because for any $x \in [0,1]$, $x$ can be thought of as a percentage of $Z^+$ that is in $E$ for some $E \subseteq \mathbb{Z}^+$. We can form subsets $E$ that are every possible percentage of $\mathbb{Z}^+$, so we can attain all points in $[0,1]$. This is indeed a measure because $\mu(\emptyset) = 0$, and $\mu$ is countably additive because for disjoint $E_1$ and $E_2$, their characteristic functions are never both 1, so the sum of their characteristic functions is the characteristic function of their union.
+
+\subsection*{2C.10}
+
+An example of a measure space $(X, \mathcal{S}, \mu)$ and a decreasing sequence $E_1 \supseteq E_2 \supseteq \ldots$ of sets in $\mathcal{S}$ such that $$\mu \left(\bigcap_{k=1}^\infty E_k\right) \neq \lim_{k \to \infty} \mu(E_k)$$ is as follows. Let $\mathcal{S} = \mathcal{B}$ and $X = \mathbb{R}$. For $A \subseteq R$, let $\mu(A) = \infty$ if $|A| = \infty$ and $\mu(A) = n$ if $|A| = n$. Then $$\lim_{n \to \infty} \mu((-\frac{1}{n}, \frac{1}{n})) = \infty$$ because for all $n \in \mathbb{N}$, $|(-\frac{1}{n}, \frac{1}{n})| = \infty$. However, $$\mu \left( \bigcap_{n \in \mathbb{N}} (-\frac{1}{n}, \frac{1}{n})\right) = \mu(\{0\}) = 0.$$
+\end{document}

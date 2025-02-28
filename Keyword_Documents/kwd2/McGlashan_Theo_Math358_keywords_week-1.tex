@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\title{Keyword Document 2}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+
+Readings for this week: Chapter 2, p. 25-37, p. 41-25.
+
+\subsection*{Key Result 1}
+
+Nonexistence of extension of length to all subsets of $\mathbb{R}$.
+
+This theorem states that there does not exist a function $\mu$ with the following properties: 
+\begin{itemize}
+    \item[(a)] $\mu$ is a function from the set of subsets of $\mathbb{R}$ to $[0, \infty]$.
+    \item[(b)] $\mu (I) = \ell (I)$ for every open interval $I$ of $\mathbb{R}$.
+    \item[(c)] $\mu \left( \bigcup_{k=1}^\infty A_k \right) = \sum_{k=1}^\infty \mu (A_k)$ for every disjoint sequence of sets $A_1, A_2, \ldots$ of subsets of $\mathbb{R}$.
+    \item[(d)] $\mu (t+A) = \mu (A)$ for every $A \subseteq \mathbb{R}$ and every $t \in \mathbb{R}$.
+\end{itemize}
+
+This is an important theorem because it describes a significant limitation of the outer measure. If we lose any of the properties (b), (c), or (d), then our outer measure loses a good deal of it's usefulness. (b) and (d) need to stay in order for our measure to make any sense as a representation of length, and (c) is incredibly useful in proving theorems. Therefore we conclude tht we must abandon (a), and find some subset of $\mathbb{R}$ on which we can define our measure.
+
+\subsection*{Key Result 2}
+
+Definiton of a $measure$.
+
+If $X$ is a set and $\mathcal{S}$ is a $\sigma$-algebra on $X$, then a $measure$ on $(X, \mathcal{S})$ is a function $\mu ~;~ \mathcal{S} \to [0, \infty]$ such that: $\mu(\emptyset) = 0$ and $$\mu \left( \bigcup_{k=1}^\infty E_k \right) = \sum_{k=1}^\infty \mu (E_k)$$ for every disjoint sequence $E_1, E_2, \ldots$ of sets in $\mathcal{S}$.
+
+This is an important definition as it allows us to extend our notion of measure outside of just $\mathbb{R}$. We can now define a measure on any set that has a possible $\sigma$-algebra. It is also worth noting that this definition lost key properties that we desired for our measure on $\mathbb{R}$, namely that $\mu (I) = \ell (I)$ for all open intervals $I$ and that measures are translation invariant. It makes sense that these conditions are gone, as we are no longer necessarilly working in spaces that have a notion of length as we commonly understand it.
+
+\subsection*{Key Strategy}
+
+Several times throughout this reading it was necessary to change one of the sides of an interval in $\mathbb{R}$ from open to closed or vice versa. This was done with the equality $$[a, b] = \bigcap_{n=1}^\infty (a - \frac{1}{n}, b + \frac{1}{n}).$$ This was first used to show that half-open intervals are Borel sets because the half-open interval can be rewritten as a countable intersection of open intervals. It is used more throughout the reading, mostly when dealing with Borel sets in cases where intervals need be open.
+\end{document}

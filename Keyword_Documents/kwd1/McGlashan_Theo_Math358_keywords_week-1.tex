@@ -1,0 +1,25 @@
+\documentclass[12pt]{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\title{Keyword Document 1}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Theorem 1.18} For $a, b, M \in \mathbb{R}$ where $a < b$, if $f_1, f_2,...$ is a sequence of Riemann integrable functions with domains $[a, b]$ such that $$|f_k (x)| \leq M$$ for all $k \in \mathbb{N}$ and all $x \in [a, b]$. Additionally, suppose $\lim_{k \to \infty} f_k(x)$ exists for each $x \in [a, b]$. Then define $f : [a, b] \to \mathbb{R}$ by $$f(x) = \lim_{k \to \infty} f_k(x)$$ If $f$ is Riemann integrable on $[a, b]$ then $$\int_a^b f = \lim_{k \to \infty} \int_a^b f_k$$
+
+This is a significant result for several reasons. Firstly, the ability to move the limit inside the integral is a very desirable property for any form of integration. A desire for this property is what motivated the creation of this theorem. However, this is a lengthy theorem with more hypotheses than we would like. Additionally, the proof of it is quite complex. These downsides are part of the importance of this theorem, as it suggests that an alternative to Riemann integration is needed.
+
+\subsection*{Theorem 2.8} If $A_1, A_2,...$ is a sequence of subsets of $\mathbb{R}$, then $$\left| \bigcup_{k=1}^\infty A_k \right| \leq \sum_{k=1}^\infty |A_k|$$
+
+This is an important property of outer measure that contributes to it's "niceness." It is quite intuitive that for many subsets of $\mathbb{R}$ in a sequence, the measure of their union would not be larger than the sum of their individual measures. Logically, if any of the sets intersect, the measure of their union should be less than the sum of their individual measures, but there should be no way for the measure of the union to be larger. This nice property is later used to prove other properties of outer measure, namely nonadditivity. 
+
+\subsection*{Key strategy} When using $\epsilon$ in proofs with a summation, several times a technique was used to make the values of $\epsilon$ sum to a finite number despite being part of an infinite sum. Instead of just using $\epsilon$, several proofs used $\frac{\epsilon}{2^k}$ where $k$ was the value summed over. Due to this $\epsilon$ term decreasing as $k$ increases, the sum of the $\epsilon$ terms create a geometric sum that adds to 1 instead of diverging to $+ \infty$. This technique is used in proofs for theorem 2.4, and for theorem 2.8.
+\end{document}

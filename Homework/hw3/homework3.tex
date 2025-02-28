@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\C{\mathbb{C}}
+\title{Problem Set 3}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+\newpage
+\
+\newpage
+\subsection*{Additional Problem 1}
+
+A measure $\mu$ on $(\R, \mathcal{S})$ is called $\textbf{Outer Regular}$ if for every $A \in \mathcal{S}$, we have for all $\epsilon > 0$, there exists open set $O \in \mathbb{S}$ with $A \subseteq O$ such that $\mu(O \setminus A) < \epsilon$.
+
+$Claim.$ For every $A \in \mathbb{S}$ with $\mu (A) < +\infty$ and for all $\epsilon > 0$, there exists a finite collection of pairwise disjoint open intervals $I_1, \ldots, I_N$ for some $N \in \N$ such that $$\mu\left( A \triangle \left( \bigsqcup_{k=1}^N I_k\right)\right) < \epsilon.$$
+
+\begin{proof}
+    Because $\mu$ is outer regular, we know that for all $A \in \mathcal{S}$ and $\epsilon > 0$, there exists an open set $O \in \mathcal{S}$ with $A \subseteq(O)$ and $\mu(O\setminus A) < \epsilon$. As $O$ is an open set, we know that $$O = \bigsqcup_{n \in \N} I_n \text{ for some collection of open intervals } (I_n)_{n \in \N}.$$ Because $\mu(O) < +\infty$ and because of additivity, we know $$\mu \left(\bigsqcup_{n\in\N} I_n \right) = \sum_{n\in\N} \mu(I_n) < +\infty.$$ Using the cauchy criterion for series, we can construct a finite collection $I_1, \ldots I_N$ such that $$\mu(O) - \sum_{k=1}^{N} \mu(I_k) < \epsilon, \text{ or equivalently, }~ \mu\left( O \setminus \bigsqcup_{k=1}^N I_k\right) < \epsilon.$$ Therefore
+    \begin{align*}
+        \mu \left( A ~\triangle \left(\bigsqcup_{k=1}^N I_k \right) \right) &= \mu \left( \left( A \cup \bigsqcup_{k=1}^N I_k\right) \setminus \left( A \cap \bigsqcup_{k=1}^N I_k \right)\right) \\
+        &\leq \mu \left( O \setminus \left( A \cap \bigsqcup_{k=1}^N I_k \right)\right) \tag{1}\label{eq:1} \\
+        &= \mu \left( (O \setminus A) \cup \left(O \setminus \bigsqcup_{k=1}^N I_k \right)\right) \\
+        &\leq \mu(O \setminus A) + \mu \left( O \setminus \bigsqcup_{k=1}^N I_k \right) < 2\epsilon \tag{2}\label{eq:2}\\
+    \end{align*}
+    Note that \eqref{eq:1} follows from the fact that $A \cup \bigsqcup_{n\in\N} I_n \subseteq O$ and \eqref{eq:2} follows from subaditivity.
+\end{proof}
+
+\subsection*{Additional Problem 2}
+
+\begin{itemize}
+    \item[(b)] Let $(X, \mathcal{S}, \mu)$ be a measure space.
+    
+    $Claim.$ Let $\{ A_n, \in \N \} \subseteq \mathcal{S}$. If $ \sum_{n \in \N} \mu(A_n) < +\infty$, then $$\mu (\{ x \in A_n~,~ i.o.\}) = 0.$$
+
+    \begin{proof}
+        The sequence $\left(\bigcup_{k = n}^\infty A_k\right)_{n\in\N}$ is a nested decreasing sequence of sets. Also, by subaditivity and our hypothesis, $$\mu\left(\bigcup_{k = 1}^\infty A_k\right) \leq \sum_{k=1}^\infty \mu(A_k) < +\infty.$$ Therefore by continuity properties and the result of part (a), we know that $$ \mu (\{ x \in A_n~,~ i.o.\}) = \mu\left(\bigcap_{n\in\N} \bigcup_{k=n}^\infty A_k \right) = \lim_{n\to\infty} \mu \left( \bigcup_{k=n}^\infty A_k\right).$$ Then because $\sum_{k=1}^\infty \mu(A_k) < +\infty$, we know by the cauchy criterion for series that for all $\epsilon > 0$, there exists $N \in \N$ such that for all $n \geq N$, $\sum_{k=n}^\infty \mu(A_k) < \epsilon$. But this means the above limit is zero, and so $\mu (\{ x \in A_n~,~ i.o.\}) = 0$.
+    \end{proof}
+
+    \item[(c)] A number $\alpha \in [0,1] \setminus \Q$ is called $Liouville$ if there exists $c \in \R$ such that $|a - \frac{p}{q}| < e^{-cq}$ for infinitely many $\frac{p}{q} \in \Q$.
+
+    $Claim.$ The set of Liouville numbers in $[0,1]$ has zero Lebesgue measure.
+
+    \begin{proof}
+        First, fix $c \in \R$. Then define $$A_q := \bigcup_{p=0}^q \left(\frac{p}{q} - e^{-cq}, \frac{p}{q} + e^{-cq} \right)$$ Observe that if and only if $\alpha \in A_n$ infinitely often in $\N$, then $\alpha$ is Liouville. Next, observe that $$\mu(A_q) \leq \sum_{p=0}^q 2e^{-cq} \leq 2(q+1)e^{-cq}$$ Therefore we know that $$\sum_{q=1}^\infty \mu(A_q) \leq \sum_{q=1}^{\infty} \frac{(2q+1)}{e^{cq}} < +\infty$$ This means we can apply the results of part (b) to say that the set of Liouville numbers has zero Lebesgue measure. 
+    \end{proof}
+\end{itemize}
+
+\subsection*{Additional Problem 3}
+
+For the cantor function $\Lambda$, define $g : [0,1] \to [0,2]$ to be the function with expression $$g(x) = \Lambda(x) + x$$
+\begin{itemize}
+    \item[(a)] $Claim.$ $g$ is continuous, bijective, and has a continuous inverse $h := g^{-1}$.
+    
+    \begin{proof}
+        We know that $\Lambda$ is continuous, so $g$ is the pointwise sum of two continuous functions, so it is continuous.
+        
+        To see $g$ is surjective, observe that $g(0) = 0$ and $g(1) = 2$. Then because $g$ is continuous, we know by the intermittent value theorem that $g$ must attain all values between $0$ and $2$, so it is surjective.
+
+        To see $g$ is injective, take $x, y \in [0,1]$ such that $g(x) = g(y)$. Therefore $\Lambda(x) + x = \Lambda(y) + y$, so $\lambda(x) - \lambda(y) = y -x$. Now assume without loss of generality that $x > y$. Then because $\Lambda$ is monotone increasing, we know $\Lambda(x) > \Lambda(y)$, so $\Lambda(x) - \Lambda(y) > 0$. But $y - x < 0$, so we have a contradiction. Therefore $x = y$ and $g$ is injective.
+
+        To see $g^{-1}$ is continuous, take $a, b \in [0,2]$ with $a \geq b$. Then there exists $x, y \in [0,1]$ such that $g(x) = a$ and $g(y) = b$ by surjectivity. Because $g$ is monotone increasing, we know that $x \geq y$. Then $g^{-1}(a) = x$ and $g^{-1}(b) = y$, so $g^{-1}$ is monotone increasing. $g^{-1}$ is also surjective, because $g$ is a bijection. Because $g^{-1}$ is bounded, surjective, and monotone, it is continuous.
+    \end{proof}
+
+    \item[(b)] $Claim.$ $g(C)$ is measurable with $|g(C)|=1$. 
+    
+    \begin{proof}
+        Observe that on $C^c$, $\Lambda$ is constant. Therefore for $x \in C^c$, $g(x) = x + k$ where $k$ is the constant value of the cantor function locally around $x$. Then for an interval $I \subseteq C^c$, we know that $g(I) = I + k$, so $|g(I)| = |I|$. In the construction of the cantor set, we remove finitely many open intervals from $[0,1]$ in each iteration, and there are finitely many iterations. Therefore the compliment of the cantor set is a countable (also disjoint) union of open intervals. Therefore by additivity, $$|g(C^c)| = \sum_{n\in\N} |g(I_n)| = \sum_{n\in\N} |I_n| = |C^c| = 1.$$ This along with the fact that $g(C^c) \subseteq [0,2]$ means that $$|[0,2] \setminus g(C^c)| = |[0,2]| - |g(C^c)| = 2 - 1 = 1.$$ And because we can write $[0,2]$ as the disjoint union $g(C) \sqcup g(C^c)$, we know that $|g(C)| = 1$.
+    \end{proof}
+
+    $Claim.$ $g(C)$ contains a non-measurable set $A$.
+
+    \begin{proof}
+        Define the relation on [0,2] by $x \sim x' \iff (x - x') \in \Q$. Then construct the set of equivalence classes $\{ [x] : [x] \cap g(C) \neq \emptyset \}$ For each element of this set, chose a representative in $g(C)$ using the axiom of choice. Let $A$ be the set of these representatives. If we assume that $A$ is measurable, we can say that $$g(c) \subseteq \bigsqcup_{r \in \Q \cup [-2,2]} (A+r) \subseteq (-2, 4).$$ We know that $|g(C)| = 1$, and for all $r \in \Q \cap [-2, 2]$, we know $|A| = |A + r|$. Therefore $$1 =|g(c)| \leq \sum_{r \in \Q \cap [-2,2]} |A| \leq |(-2, 4)| = 6.$$ But then $|A|$ must be nonzero for the sum to be at least 1, but then the sum diverges because it is an infinite sum of nonzero numbers. Therefore we have a contradiction, and $A$ is not measurable.
+    \end{proof}
+
+    \item[(c)] $Claim.$ $g$ maps some measurable set surjectively onto a non-measurable set.
+    
+    \begin{proof}
+        We know from (b) that $A \subseteq g(C)$ for non-measurable set $A$. Therefore $g^{-1}(A) \subseteq C$. Then define $D = g^{-1}(A) \cap C$. Then $g(D) = A$, and because $|C| = 0$, we know that $|D| = 0$, so $D$ is measurable. Because $g(D) = A$, this map is surjective.
+    \end{proof}
+
+    \item[(d)] $Claim.$ $D := g^{-1} (A)$ is a Lebesque measurable set but not a Borel set.
+    
+    \begin{proof}
+        We know that $g^{-1}$ is continuous and $[0,2]$ is Borel-measurable, so by 2.41 we know $g^{-1}$ is a Borel-measurable function. Then assume that $g^{-1} (A) = D$ is Borel-measurable. We know by 2.51 that $g(g^{-1} (A))$ is Borel-measurable. But $g(g^{-1} (A)) = A$, which is not Borel-measurable, so we have a contradiction. Therefore $D$ is not Borel-measurable. Note also that we can interchange the preimage and inverse here because $g$ is a bijection.
+    \end{proof}
+\end{itemize}
+
+\subsection*{Additional Problem 4}
+
+\begin{itemize}
+    \item[(b)] For a fixed $n \in \N$, let $I_{n,k}$ for $k = 1,\ldots 2^n$ be the component subintervals of the $n$-th level Cantor set $$I_n := \bigsqcup_{k=1}^{2^n} I_{n,k} = [0,1] \setminus \left( \bigsqcup_{k=1}^n G_k \right).$$ Where $G_n$ are the gaps removed at the $n$-th stage of the construction of $C$.
+    
+    $Claim.$ If $x, y \in C$ with $|x-y| < 3^{-n}$, then $x$ and $y$ are in the same component $I_{n,k}$, and $|\Lambda(x) - \Lambda(y)| \leq 2^{-n}.$
+
+    \begin{proof}
+        If $|x - y| < 3^{-n}$, then $x$ and $y$ written in base 3 must have the same first $n$ digits. Therefore $\Lambda (x)$ and $\Lambda (y)$ are base 2 numbers with the same first $n$ digits, so they differ at most by $2^{-n}$. Because $x$ and $y$ are in $C$, we know they have a base 3 representation with only 0's and 2's. Because each level of the cantor set removes the middle third of all remaining intervals, splitting these intervals in 2, the base 3 representation of $x$ and $y$ containing only 0's and 2's can be thought of as an index to what remaining interval of the cantor set $x$ and $y$ are in, where for the $k$-th digit of $x$ and $y$, the value of $k$ decides which of the intervals formed at the $k$th level of the cantor set $x$ and $y$ go in. Therefore if $x$ and $y$ share the same first $n$ digits, they are in the same interval at least up to the $n$th level of the cantor set.
+    \end{proof}
+
+    $Claim.$ the above result implies the cantor function $\Lambda$ is continuous on $C$.
+
+    \begin{proof}
+        Let $\epsilon > 0$. Then take $n \in \N$ where $2^{-n} < \epsilon$. Then let $\delta = 3^{-n}$. By the previous claim, we know that for $x, y \in C$ with $|x - y| < \delta$, we have $$|\Lambda(x) - \Lambda(y)| \leq 2^{-n} < \epsilon.$$ Therefore $\Lambda$ is continuous on $C$.
+    \end{proof}
+\end{itemize}
+\end{document}

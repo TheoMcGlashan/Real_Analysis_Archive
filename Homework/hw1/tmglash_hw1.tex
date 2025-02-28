@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\title{Homework 1}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+\newpage
+\
+\newpage
+
+\subsection*{Problem 1}
+
+Define $f: [0,1] \to \mathbb{R}$ as follows:
+
+\vspace{1em}
+$f(a) = \begin{dcases} 
+            0 & \text{if}~a~\text{is rational} \\
+            \frac{1}{n} & \text{if}~a~\text{is rational and}~n~\text{is the smallest positive} \\
+            & \text{integer such that}~a = \frac{m}{n}~\text{for some integer}~m.
+            \vspace{1em} \\
+        \end{dcases}$
+vspace{1em}\\
+Claim: $f$ is Riemann integrable and $\int_0^1 f = 0$
+\begin{proof}
+
+For $n \in \mathbb{N}$, define $$A_n := \{ x \in \mathbb{Q} \cap [0,1] : x = \frac{p}{q}~\text{for some}~ 1 \leq q \leq n ~\text{and}~ 0 \leq p \leq q \}$$ Then $A_n \subseteq A_{n+1}$ for all $n \in \mathbb{N}$ and $$\mathbb{Q} \cap [0,1] = \bigcup_{n \in \mathbb{N}} A_n$$ Now for $n \in \mathbb{N}$, define $$f_n := f \cdot \chi_{A_n}$$
+
+Then observe that for all $n \in \mathbb{N}$, for $a \in [0,1]$ where $0 < f(a) < \frac{1}{n}$, the indicator function $\chi_{A_n} = 0$. This is because there exists no $q$ and $p$ with $1 \leq q \leq n$ and $0 \leq p \leq q$ such that $a = \frac{p}{q}$.
+
+However, when $f(a) \geq \frac{1}{n}$, then $a \in A_n$, so $\chi_{A_n} = 1$. This means that $f_n$ can be thought of as all values of $f$ that are greater than or equal to $\frac{1}{n}$.
+
+This means that as $n \to \infty$, $f_n$ approaches $f$ in some sense. More precisely, $$||f_n - f||_\infty = \frac{1}{n+1}$$ Because $\lim_{n \to \infty} \frac{1}{n+1} = 0$, we know that $f_n \to f$ uniformly. Now, observe that each $f_n$ differs from $0$ on a finite set of points, also because $f_n = 0$ when $f < \frac{1}{n}$. This means that for all $n \in \mathbb{N}$, $f_n$ is Riemann integrable with integral $0$. Therefore $f$ is Riemann integrable with integral $0$.
+\end{proof}
+
+\subsection*{Problem 2}
+
+\begin{itemize}
+    \item[(a)] Let $f: [a,b] \to \mathbb{R}$ be a non-negative, bounded function satisfying $0 \leq f \leq M$ for some $M > 0$. For $n \in \mathbb{N}$, consider the sets $$E_{n,k} := \left\{ \frac{kM}{2^n} \leq f < \frac{(k+1)M}{2^n}\right\},~ 0 \leq k \leq 2^n -1,$$ and use them to define the simple function $$\phi_n := \sum_{k=0}^{2^n-1} \frac{kM}{2^n} \chi_{E_{n,k}}.$$ Claim: for all $n \in \mathbb{N}$, one has 
+    \begin{align*}
+        & 0 \leq \phi_n \leq \phi_{n+1} \leq f \\
+        & 0 \leq f - \phi_n \leq \frac{M}{2^n}
+    \end{align*}
+    and $\phi_n \to f$ uniformly on $[a,b]$.
+
+    \begin{proof}
+        For $n \in \mathbb{N}$ and $x_0 \in [a,b]$, there exists a unique $k_0$ such that $x_0 \in E_{n,k}$. This is because $f$ is non-negative and bounded, and the sets $E_{n,k}$ are disjoint over different values of $k$. Thus for all $n \in \mathbb{N}$, $$\phi_n (x_0) = \frac{k_0M}{2^n} \leq f(x_0)$$ To describe $\phi_{n+1}$, observe that
+        \begin{align*}
+            E_{n+1, 2k} \cup E_{n+1, 2k+1} &= \left\{ \frac{2kM}{2 (2^n)} \leq f < \frac{(2k+1)M}{2(2^n)}\right\} \cup \left\{ \frac{(2k+1)M}{2(2^n)} \leq f < \frac{(2k+2)M}{2(2^n)}\right\} \\
+            &= \left\{ \frac{kM}{2^n} \leq f < \frac{(2k+1)M}{2(2^n)}\right\} \cup \left\{ \frac{(2k+1)M}{2(2^n)} \leq f < \frac{(k+1)M}{2^n}\right\} \\
+            &= \left\{ \frac{kM}{2^n} \leq f < \frac{(k+1)M}{2^n}\right\} = E_{n,k}
+        \end{align*}
+        This means that for $x_0 \in E_{n,k_0}$, $x_0$ is either in $E_{n+1, 2k_0}$ or $E_{n+1, 2k_0+1}$. If $x_0 \in E_{n+1, 2k_0}$, then $$\phi_{n+1}(x_0) = \frac{2k_0M}{2(2^n)} = \frac{k_0M}{2^n} = \phi_n(x_0)$$ If $x_0 \in E_{n+1, 2k_0+1}$, then $$\phi_{n+1}(x_0) = \frac{(2k_0+1)M}{2(2^n)} \geq \frac{k_0M}{2^n} = \phi_n(x_0)$$ Therefore $$0 \leq \phi_n \leq \phi_{n+1} \leq f$$
+
+        Additionally, $f(x_0) \leq \frac{(k_0+1)M}{2^n}$, so $$f(x_0) - \phi_n(x_0) \leq \frac{(k+1)M}{2^n} - \frac{kM}{2^n} = \frac{M}{2^n}$$
+
+        Therefore $\phi_n \to f$ uniformly on $[a,b]$.
+    \end{proof}
+
+    \item[(a)] Claim: Every monotone function $f: [a,b] \to \mathbb{R}$ is Riemann integrable.
+    
+    \begin{proof}
+        Without loss of generality, assume that $f$ is increasing and non-negative. Now, observe that each $E_{n,k}$ must be an open interval because $f$ is monotone. This means that for all $n \in \mathbb{N}$, $\phi_n$ is a step function, meaning $\phi_n$ is Riemann integrable. Finally, $\phi_n \to f$ uniformly on $[a,b]$, so $f$ is Riemann integrable.
+    \end{proof}
+
+\subsection*{Problem 3} Claim: If $A$ and $B$ are subsets of $\mathbb{R}$ and $|B|=0$, then $|A \cup B| = |A|$.
+
+\begin{proof}
+    Beacuse $|B|=0$, for all $\epsilon > 0$, there exists open intervals $I_1,..., I_n$ such that $$B \subseteq \bigcup_{k = 1}^n I_k \hspace{5em}\sum_{k = 1}^n \ell(I_k) < \epsilon$$ It follows that $A \cup B \subseteq A \cup \bigcup_{k=1}^n I_k$. Also utilizing countable subaditivity, we have $$|A \cup B| \leq |A \cup \bigcup_{k=1}^n I_k| \leq |A| + \sum_{k=1}^n \ell(I_k) < |A| + \epsilon$$ Therefore $|A \cup B| \leq |A|$, and clearly $|A| \leq |A \cup B|$, so $|A \cup B|$ = $|A|$.
+\end{proof}
+
+\subsection*{Problem 4}
+
+For $A \subseteq \mathbb{R}$ and $t \in \mathbb{R}$, let $tA=\{ta:a \in A\}$.
+Claim: $|tA| = |t||A|$.
+
+\begin{proof}
+    Suppose $I_1, I_2,...$ is a sequence of open intervals whose union contains $A$. Then $tI_1, tI_2,...$ is a sequence of open intervals whose union contains $tA$. Thus $$|tA| \leq \sum_{k=1}^\infty \ell(tI_k) = |T| \sum_{k=1}^\infty \ell(i_k)$$ Taking the infimum of the last term over all sequences $I_1, I_2,...$ of open intervals whose union contains $A$, we have $|tA| \leq |T||A|$. For the other direction of inequality, note that $A = \frac{1}{t}tA$. Applying the above inequality replacing $A$ with $tA$ and $t$ with $\frac{1}{t}$, we have $|A| = |\frac{1}{t}tA| \leq |tA|$. Therefore $|tA| = |t||A|$.
+\end{proof}
+\end{itemize}
+
+\subsection*{Problem 5}
+
+\begin{itemize}
+    \item[(a)] An example of a step function on $[a,b]$ with at least 3 steps is
+    $$f(x) = \begin{cases} 
+    -1 & a \leq x < \frac{a+b}{3}, \\
+    0 & \frac{a+b}{3} \leq x < \frac{2(a+b)}{3}, \\
+    1 & \frac{2(a+b)}{3} \leq x \leq b.
+    \end{cases}$$
+    This function is Riemann integrable because it is on a closed interval and is continuous except for a finite number of discontinuities. The same is true for all step functions on closed intervals.
+
+    \item[(b)] For $f \in \mathcal{R}([a,b])$ and partition $P = x_0, x_1,...,x_n$ of $[a,b]$, the upper and lower Riemann sums are:
+    \begin{align*}
+        L(f,P,[a,b]) &= \int_a^b \left(\sum_{j=1}^{n-1} \chi_{[x_{j-1},x_j)} \inf_{x \in [x_{j-1}, x_j]}\right) + \chi_{[x_{n-1},x_n]} \inf_{x \in [x_{n-1}, x_n]} \\
+        U(f,P,[a,b]) &= \int_a^b \left(\sum_{j=1}^{n-1} \chi_{[x_{j-1},x_j)} \sup_{x \in [x_{j-1}, x_j]}\right) + \chi_{[x_{n-1},x_n]} \sup_{x \in [x_{n-1}, x_n]}
+    \end{align*}
+
+    \item[(c)] Claim: for $f \in \mathcal{R}([a,b])$ and for all $\epsilon > 0$, there exists step functions $s_-$ and $s_+$ on $[a,b]$ with $$\inf_{x \in [a,b]} f(x) \leq s_- \leq f \leq s_+ \leq \sup_{x \in [a,b]} f(x)$$ so that $$\int_a^b |f - s_\pm| < \epsilon.$$
+    
+    \begin{proof}
+        Because $f \in \mathcal{R}([a,b])$, the cauchy criterion for Riemann integrability states that for every $\epsilon > 0$, there exists a partition $P$ such that $$U(f,P) - L(f,P) < \epsilon.$$
+        We will use this partition $P = x_1, x_2, ..., x_n$ and the step functions defined for part (b).
+        \begin{align*}
+            s_- &= \left(\sum_{j=1}^{n-1} \chi_{[x_{j-1},x_j)} \inf_{x \in [x_{j-1}, x_j]}\right) + \chi_{[x_{n-1},x_n]} \inf_{x \in [x_{n-1}, x_n]} \\
+            s_+ &= \left(\sum_{j=1}^{n-1} \chi_{[x_{j-1},x_j)} \sup_{x \in [x_{j-1}, x_j]}\right) + \chi_{[x_{n-1},x_n]} \sup_{x \in [x_{n-1}, x_n]}
+        \end{align*}
+        These functions evaluate to the infimum and supremum of $f$ on subsets of $f$. The infimum on a subset is at least equal to the infimum on the set, and the supremum on a subset is at most equal to the supremum on the set. Also, the infimum of $f$ is at most equal to $f$ and the supremum is at least equal to $f$. This gives us that $$\inf_{x \in [a,b]} f(x) \leq s_ \leq f \leq s_+ \leq \sup_{x \in [a,b]} f(x)$$
+        Because we defined $s_-$ and $s_+$ as in part (b), we know that
+
+        \begin{align*}
+            L(f,P) &= \int_a^b s_- \\
+            U(f,P) &= \int_a^b s_+
+        \end{align*}
+
+        Therefore $$\int_a^b |f - s_\pm| \leq U(f,P) - L(f,P) < \epsilon$$
+    \end{proof}
+\end{itemize}
+\end{document}
