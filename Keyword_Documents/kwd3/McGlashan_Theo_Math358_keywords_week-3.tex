@@ -19,6 +19,18 @@ This week's readings: Chapter 2 p. 62-68, Chapter 3 p.74-81.
 
 \subsection*{Key Result 1: $Egorov's~Theorem$}
 
-Suppose $(X, \mathcal{S}, \mu)$ is a measure space with $\mu(X) < \infty$. Suppose $f_1, f_2$ is a sequence of $\mathcal{S}$-measurable functions from $X$
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space with $\mu(X) < \infty$. Suppose $f_1, f_2$ is a sequence of $\mathcal{S}$-measurable functions from $X$ to $\R$ that converges pointwise on $X$ to a function $f : X \to \R$. Then for every $\epsilon > 0$, there exists a set $E \in \mathcal{S}$ such that $\mu(X \setminus E) < \epsilon$ and $f_1, f_2, \ldots$ converges uniformly to $f$ on $E$.
+
+This theoremm tells us a very useful property of measure spaces. Pointwise convergence fails to get us several key properties, including the ability to interchange integrals and limits. Uniform convergence is needed for these properties, which is why it is so important to be able to conclude these properties about pointwise convergent functions, with a relatively small drawback. We lose a little bit of our set, on which we do not know our function converges. However, this little bit has arbitrarily small measure, so it generally does not cause problems. This result is found on page 63 of the textbook.
+
+\subsection*{Key Result 2: $Integral~of~a~Nonnegative~Function$}
+
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $f : X \to [0, \infty]$ is an $\mathcal{S}$-measurable function. The integral of $f$ with respect to $\mu$, denoted $\int f~d \mu$ is defined by $$\int f~d\mu = \sup \{ \mathcal{L}(f, P) : P \text{ is an } \mathcal{S} \text{-partition of } X\}.$$
+
+This is a culmination of the work we have done throughout chapter 2 of the book on measure spaces. The original motivation for developing the concept of measure was because our Riemann integrals had odd and unwanted behavior at times. Several key ways that this integral behaves better than the Riemann integral are shown after this definition in the book. This result is found on page 74 of the textbook.
+
+\subsection*{Key Result 3: $Approximation~by~Simple~Functions$}
+
+Approximation by simple functions is used many times throughout this section of the reading. The idea of the technique is, given a function $f$, to use theorem 2.89 of the textbook to construct a sequence $f_1, f_2, \ldots$ of $\R$-valued functions that approximate $f$ with several nice properties. This technique is used in the proof of Luzin's theorem, as well as to prove theorem 2.95, and theorem 3.16. The general usage of it in these proofs is, when studying a function we know little about, to prove our claim on the sequence of simple functions, and then extend the result back to our original function using the nice properties in 2.89.
 \maketitle
 \end{document}
