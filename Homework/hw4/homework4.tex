@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\C{\mathbb{C}}
+\title{Problem Set 4}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+\newpage
+\
+\newpage
+
+\subsection*{Aditional Problem 1}
+
+\begin{itemize}
+    \item[(a)] For $\emptyset \neq E \subseteq \R$ and $y \in \R$, define the distance of $y$ to $E$ as $$\text{dist}(y; E) := \inf_{x \in E} |x - y| \in [0, + \infty)$$
+    
+    $Claim.~$ For all $y, z \in \R$, one has 
+    \begin{align}
+        |\text{dist}(y; E) - \text{dist}(z; E)| \leq |y - z|. \label{eq:1}
+    \end{align}
+    Furthermore, this implies that the map $y \mapsto \text{dist}(y; E)$ is a continuous function from $\R$ to $\R$.
+
+    \begin{proof}
+        For the proof of (1), let $\epsilon > 0$. Then there exists $w \in E$ such that \begin{align}
+            |w - z| - \epsilon < \text{dist}(y; E). \label{eq:2}
+        \end{align}
+        We can use this inequality to estimate the left side of \eqref{eq:1}:
+        \begin{align}
+            |\text{dist}(y;  E) - \text{dist}(z; E)| &= |\inf_{x \in E} |x - y| - \inf_{v \in E} |v - z| | \nonumber \\
+            &< |\inf_{x \in E} |x - y| - (|w - z| - \epsilon) | \label{eq:3}\\
+            &\leq ||w - y| - |w - z| | + \epsilon \label{eq:4} \\
+            &\leq |w-y-w+z+\epsilon| \nonumber \\
+            &\leq |y - z| + \epsilon \nonumber
+        \end{align}
+        where \eqref{eq:3} holds because of \eqref{eq:2} and \eqref{eq:4} holds by the definition of the infimum. Because the inequality in \eqref{eq:3} is strict, we can remove the $\epsilon$ and our proof of \eqref{eq:1} is complete.
+
+        To show continuity of the map $y \mapsto \text{dist}(y; E)$, let $\epsilon > 0$. Then let $\delta = \epsilon$. Then for all $x \in E$ where $|x - y| < \epsilon$, we know by \eqref{eq:1} that $$|\text{dist}(y; E) - \text{dist}(x, E)| \leq |y - z| < \delta = \epsilon.$$ Therefore this map is continuous.
+    \end{proof}
+
+    \newpage
+
+    \item[(b)]
+    
+    $Claim.~$ Assume $\epsilon \neq \emptyset$ is closed. Then dist$(y; E) = 0$ if and only if $y \in E$.
+
+    \begin{proof}
+        For the forward direction of this claim, assume that dist$(y; E) = 0$. Then $\inf_{x \in E} |x - y| = 0$, and for all $\epsilon > 0$, there exists $w \in E$ such that $$| \inf_{x \in E} |x - y| - |w - y| | < \epsilon.$$ Then let $\epsilon = \frac{1}{n}$, and use this statement to construct the sequence $(W_n)_{n \in \N}$ where for all $n \in \N$, the statement holds for $w_n$. Then $\lim_{n \to \infty} w_n = y$. But $E$ is a closed set, so it contains its limit points, and $w_n \in E$ for all $n \in \N$, so $y \in E$.
+
+        For the backward direction of the claim, assume that $y \in E$. Then dist$(y; E) = \inf_{x \in E} |x - y|$, but dist$(y; E) \geq 0$, and $|y - y| = 0$, so $\inf_{x \in E} |x - y| = 0$.
+    \end{proof}
+
+    For a counterexample when $E$ is not closed, let $E = (0,1)$, and let $y = 0$. Then for $n \in \N$, let $\epsilon = \frac{1}{2n}$. We know that for all $n \in \N$, we have $$y + \frac{1}{2n} = \frac{1}{2n} \in (0,1) = E.$$ Therefore $\inf_{x \in E} |x - y| \leq \frac{1}{2n}$ for all $n \in \N$, so $\inf_{x \in E} |x - y| = 0$, meaning dist$(y; E) = 0$ for $y \notin E$, completing the counterexample.
+
+    \item[(c)]
+        $Urysohn's~Lemma.$ Let $E, F$ be two \textit{non-empty, disjoint, and closed} sets in $\R$. Then, there exists a continuous function $g : \R \to \R$ with $0 \leq g \leq 1$ such that $g = 0$ on $E$ and $g = 1$ on $F$.
+
+        \begin{proof}
+            Let $E, F$ be as described in the lemma and let $$g(y) := \frac{\text{dist}(y; E)}{\text{dist}(y; E) + \text{dist} (y; F)}, ~y \in \R.$$
+            
+            First, assume $y \in E$. Then dist$(y; E) = 0$ by (b), and because $E$ and $F$ are disjoint, $y \notin F$, so again by (b) we know dist$(y; F) > 0$. Therefore $g(y) = 0$.
+
+            Then assume $y \in F$. Then dist$(y; F) = 0$ and dist$(y; E) > 0$, so $$g(y) = \frac{\text{dist} (y; E)}{\text{dist}(y; E)} = 1.$$
+
+            Finally, assume $y \notin E$ and $y \notin F$. Then both dist$(y; E)$ and dist$(y; F)$ are positive, so $0 < g(x) < 1$.
+        \end{proof}
+\end{itemize}
+
+\subsection*{Additional Problem 2}
+
+For $\mu_\N$, the counting measure of the natural numbers, let $(\R, \mathcal{P}, \mu_\N)$ be a measure space. Additionally, let $0 \leq f: \R \to \R$ be a function.
+
+\begin{itemize}
+    \item[(a)] $Claim.~$ The statement
+    \begin{align}
+        \int f d\mu_\N = \sum_{n = 1}^\infty f(n) \label{eq:5}
+    \end{align}
+    holds for all finitely supported, non-negative, simple functions.
+
+    \begin{proof}
+        Because $f$ is a simple function, it can be written as $\sum_{k=1}^N c_k \chi_{E_k}$ for some $c_1, \ldots c_N \in \R$ and $E_1, \ldots E_N \subseteq \R$. Then by the definition of the integral of simple functions, we know $$\int f d\mu_\N = \sum_{k=1}^N c_k \mu_\N (E_k).$$ Now looking at the right side of \eqref{eq:5}, observe that for any $n \in N$, $$f(n) = \begin{cases}
+            c_k &\text{ if } x \in E_k \\
+            0 &\text{ if } x \notin E_k \text{ for all k}
+        \end{cases}$$
+        Therefore for any $c_k$, the sum on the right side of \eqref{eq:5} adds that $c_k$ term for each $n \in E_k$, where $n \in N$. But this is precisely $c_k \mu_\N (E_k)$, so $$\sum_{n=1}^{\infty} f(n) = \sum_{n=1}^{N} c_k \mu_\N (E_k) = \int f d \mu_\N.$$
+    \end{proof}
+
+    \item[(b)]
+    
+    $Lemma.~$ \textit{Given a measure space} $(Y, \mathcal{S}, \mu)$, \textit{suppose that} $(Y_n)_{n \in N}$ \textit{is an} $\mathcal{S}$\textit{-valued sequence of nested increasing sets such that} $$Y = \bigcup_{n \in \N} Y_n.$$ \textit{Then for every measurable function} $0 \leq f : Y \to \R$, \textit{one has} $$\lim_{n \to \infty} \int \chi_{Y_n} f d\mu = \int f d \mu$$
+    
+    \item[(c)]
+    $Proof~of~Lemma.~$ Let $(f_n)_{n \in N}$ be a series of functions defined by $f_n = \chi_{Y_n} f$. Then $(f_n)_{n \in \N}$ is an increasing sequence of measurable functions. We also know $\lim_{n \to \infty} f_n = f$, so we can apply the monotone convergence theorem to get $$ \lim_{n \to \infty} \int \chi_{Y_n} f d \mu = \int f d \mu.$$
+\end{itemize}
+\end{document}
