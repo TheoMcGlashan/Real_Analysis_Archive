@@ -98,7 +98,70 @@ For $\mu_\N$, the counting measure of the natural numbers, let $(\R, \mathcal{P}
     
     $Lemma.~$ \textit{Given a measure space} $(Y, \mathcal{S}, \mu)$, \textit{suppose that} $(Y_n)_{n \in N}$ \textit{is an} $\mathcal{S}$\textit{-valued sequence of nested increasing sets such that} $$Y = \bigcup_{n \in \N} Y_n.$$ \textit{Then for every measurable function} $0 \leq f : Y \to \R$, \textit{one has} $$\lim_{n \to \infty} \int \chi_{Y_n} f d\mu = \int f d \mu$$
     
+    $Claim.~$ Equation \eqref{eq:5} holds for an arbitrary function $0 \leq f: \R \to \R$.
+
+    \begin{proof}
+        Let $(Y_n)_{n \in \N}$ be a sequence of nested increasing sets defined by $Y_n = [-n, n]$.
+        Then observe that $\mu_\N$-a.e. , we know that $$\chi_{Y_n} f = \sum_{k=1}^{n} f(k) \chi_{\{k\}} =: \varphi_n.$$ Because these differ on a set of finite measure only, we know $$\int \chi_{y_n} f d \mu_\N = \int \sum_{k=1}^{n} f(k) \chi_{\{k\}} d \mu_\N.$$ But $\varphi_n$ is a simple function, so by (a), we have $$\int f \chi_{Y_n} d \mu_\N = \int \varphi d \mu_\N = \sum_{k=1}^\infty \varphi_n (k).$$ Then because $\lim_{n \to \infty} Y_n = Y$, we can say $$\int f d \mu_\N = \lim_{n \to \infty} \int f \chi_{Y_n} d \mu_\N = \lim_{n \to \infty} \sum_{k=1}^{\infty} \varphi_n (k) = \sum_{k=1}^{\infty} f(k)$$
+    \end{proof}
     \item[(c)]
     $Proof~of~Lemma.~$ Let $(f_n)_{n \in N}$ be a series of functions defined by $f_n = \chi_{Y_n} f$. Then $(f_n)_{n \in \N}$ is an increasing sequence of measurable functions. We also know $\lim_{n \to \infty} f_n = f$, so we can apply the monotone convergence theorem to get $$ \lim_{n \to \infty} \int \chi_{Y_n} f d \mu = \int f d \mu.$$
 \end{itemize}
+
+\subsection*{Additional Problem 3}
+
+A Borel measure $\mu$ on $X \subseteq \R$ is regular if for every Borel set $A \subseteq X$, there exists a closed set $f \subseteq A$ and open set $O \supseteq A$ such that $$\mu(A \setminus F) < \epsilon \text{ and } \mu(O \setminus A) < \epsilon$$
+\begin{itemize}
+    \item[(a)] Let $\mu$ be a finite regular Borel measure on $X = [a, b]$, and $f : [a,b] \to \R$ be a measurable function.
+    
+    $Claim.~$ For all $\epsilon, \eta > 0$, there exists a step function $s : [a, b] \to \R$ such that $$ \mu( \{|f - s| > \eta\} ) < \epsilon.$$
+
+    \begin{proof}
+        Let $\epsilon, \eta > 0$. Then because $f$ is measurable, we know that there exists $A \subseteq [a, b]$ where $\mu([a, b] \setminus A) < \epsilon$ and $f|_A$ is bounded. Then construct a sequence of simple functions $$(\varphi_n)_{n \in \N} \text{ such that } \varphi_n \nearrow f \text{ on } A.$$ Then because $f$ is bounded on $A$, this convergence is uniform on $A$. Then there exists $N \in \N$ such that 
+        \begin{align}
+            | \varphi_N - f| < \eta. \label{eq:6}
+        \end{align} By definition of simple functions, we know $$\varphi_n = \sum_{k=1}^{K_n} c_k \chi_{E_k} \text{ for } c_k \in \R \text{ and } E_k \subseteq \R.$$ Then because $f$ is defined on $[a, b]$ and $\mu ([a, b]) < \infty$ because $\mu$ is a finite measure, we know $\mu (E_k) < \infty$ for all $E_k$. Then by Littlewood's first principle, we have $$\mu \left( E_k ~\triangle \left( \bigsqcup_{m=1}^M I_{k, m}\right)\right) < \frac{\epsilon}{2^k} ~\text{ for intervals } I_{k,m}.$$ Then define a sequence of functions $(s_n)_{n \in N}$ where $$s_n = \sum_{k=1}^{K} c_k \sum_{m=1}^{M} \chi_{I_{k,m}}$$ assuming without loss of generality that all $I_{k, m}$ are disjoint. Then by this definition, $$\{|\varphi_n - s_n| \neq 0\} \subseteq \bigcup_{k=1}^K \left(E_k \triangle \bigsqcup_{m=1}^M I_{k, m}\right).$$ But the right side of the above has measure $\leq \sum_{k=1}^{\infty} \frac{\epsilon}{2^k} = \epsilon$, so the left side has measure $\leq \epsilon$, which is the same as measure $< \epsilon$ (just vary $\epsilon$ at the start of the proof). 
+
+        Then for $s_N$, where $N$ is defined near the beginning of the proof, we have $$\mu( \{ |f - s_N| > \eta \}) <\mu( \{|f - \varphi_N | > \eta \}) + \epsilon = \epsilon.$$ Here the first inequality holds because the measure of the points where $\varphi_N$ and $s_N$ are different is less than $\epsilon$, and the second equality follows from \eqref{eq:6} telling us that there are no points where $|f - \varphi_N| > \eta$. Then because $S_N$ is a step function, we have our claim.
+    \end{proof}
+
+    \item[(b)] $Claim.~$ For every measurable function $f : [a, b] \to \R$ and every $\eta, \mu > 0$, there exists a continuous function $h [a, b] \to \R$ such that $$\mu( \{|f - h| > \eta \}) < \epsilon.$$
+    
+    \begin{proof}
+        Let $\epsilon, \eta > 0$. Then by (a), there exists step function $s : [a, b] \to \R$ such that $\mu(\{|f - s| \eta\}) < \epsilon.$ Then by definition, $$s = \sum_{k=1}^{n} c_k \chi_{I_k} ~\text{ where } I_k \text{ are intervals and } c_k \in \R.$$ Assume without loss of generality that each $I_k$ is disjoint. Then for each $I_k$, we do not know if this is a closed or open interval. However, $\mu$ is regular, so we have a closed interval $I_k'$ such that $\mu(I_k \ I_k') < \epsilon$. Then for $I_j', I_{j+1}'$, we know by Urysohn's Lemma that there exists $g : \R \to \R$, a continuous function such that $0 \leq g \leq 1$ and $g|_{I_j'} = 0, ~g|_{I_{j+1}'} = 1$. Then for any $a \in I_j'$ and $b \in I_{j+1}'$, construct the function $$h_j := (s(a) - s(b))g + s(a)$$ which will be the same regardless of our choice of $x$ and $y$. This is a continuous function valued at $s(a)$ on $I_j'$ and $s(b)$ on $I_{j+1}'$, meaning it is valued at $s$ on these intervals. Then $h_j = h_{j+1}$ on $I_{j+1}'$, so we can define a function $h$ that takes the value of each $h_j$ for $I_j'$ to $I_{j+1}'$, then each $h_j$ will overlap with the next, but they will both have the same constant value where they overlap.
+
+        Because of the construction of our intervals $I_k'$, we know that $h$ differs from $s$ at most on a set of measure $< n\epsilon$, which can still be made arbitrarily small, so our claim holds.
+    \end{proof}
+
+    \item[(c)] $Claim.~$ The counting measure $\mu_\N$ is sigma finite and regular on $\R$.
+    
+    \begin{proof}
+        $\R = \bigcup_{n \in \N} (-n, n)$, and $\mu_\N (-n, n)$ is finite for all $n \in \N$, so $\mu_\N$ is sigma finite.
+
+        For any Borel set $B$, construct an open set $O$ such that for each connected component of $B$, $O$ is locally the smallest open interval $(a, b)$ containing the component such that $a, b \in \N$. Then $\mu_\N (a, b)$ equals the measure of this component of $B$, so $\mu (O) = \mu (B)$.
+
+        Then construct a closed set $F$ such that for each connected component of $B$, $F$ is locally the largest open interval $[c, d]$ contained in the component such that $c, d \in \N$. Then $\mu_\N [a, b]$ equals the measure of this component of $B$, so $\mu (F) = \mu (B)$. Therefore $\mu_\N$ is regular.
+    \end{proof}
+
+    $Claim.~$ The Dirac delta measure $\delta_c$ for every fixed $c \in \R$ is a regular Borel measure on $\R$.
+
+    \begin{proof}
+        Take $c \in \R$. Then for a Borel set $B$, construct an open set $O$. If $c \notin B$, then let $O$ be the intersection of all open sets containing $B$. Then if $c \in O$, then $c$ is in every open set containing $B$. But then $c \in B$, which is a contradiction, so $c \notin O$. Therefore $B$ and $O$ have measure $O$. If $c \in B$, then any open set containing $B$ has measure 1, as does $B$.
+
+        Now construct a closed set $F$. If $c \in B$, then let $F$ be the union of all closed sets contained in $B$. Then if $c \notin F$, then $c$ is not in any closed set containing $B$. But then $c \notin B$, which is a contradiction, so $c \in F$. Therefore $B$ and $F$ both have measure 1. If $c \notin B$, then any closed set contained in $B$ has measure 0, as does $B$. Therefore this measure is regular on $\R$.
+    \end{proof}
+\end{itemize}
+
+\subsection*{3A.3}
+
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $f : X \to [0, \infty]$ is an $\mathcal{S}$-measurable function.
+
+$Claim.~$ $$\int f d \mu > 0 \text{ if and only if } \mu( \{ x \in X: f(x) > 0\}) > 0.$$
+
+\begin{proof}
+    ($\implies$) For the forward direction, we prove the contrapositive by showing that $$\mu( \{ x \in X: f(x) > 0\}) = 0 \implies \int f d \mu = 0.$$
+    To do this, first define $B := \{ x \in X: f(x) > 0\}$. Then let $A_1, \ldots A_n$ be a partition of $\mathcal{S}$. Then $$\mathcal{L} (f; p) = \sum_{k=1}^{n} \mu (A_k) \inf_{A_k} f.$$ Then for any $A_k$ where $A_k \cap B \neq A_k$, there exists $x \in A_k$ such that $f(x) = 0$, so $\inf_{A_k} = 0$. Therefore only those $A_k$'s where $A_k \subseteq B$ are relevant for this sum. But $\mu(B) = 0$ by hypothesis, so $\mu(A_k) = 0$ for all $A_k \subseteq B$, so the whole sum is 0. Then because we chose a partition of $\mathcal{S}$ arbitrarily, we know $\int f d \mu = 0$.
+
+    $(\impliedby$) For the backwards direction, let $(B_n)_{n \in \N}$ be a sequence of sets where $$B_n := \{x \in X : f(x) > \frac{1}{n}\}.$$ Then this sequence is nested increasing. so by our continuity properties we have $$\mu(\bigcup_{n \in \N} A_n) = \lim_{n \to \infty} \mu (A_n) > 0$$ where the last inequality follows from our hypothesis. Then assume that this limit is $c > 0$ for some $c \in \R$. Then by the definition of convergence, we know that there exists an $N \in \N$ such that $|\mu (A_N) - c| < c$. Then $\mu(A_n) > 0$. Now let $P = A_N, X \setminus A_N$ be a partition of $X$. Note $A_N \in \mathcal{S}$ because $A_N = f^{-1} (\frac{1}{N}, \infty)$. But then, noting $\inf_{A_N} f = \frac{1}{N}$, we have $$\int f d \mu \geq \mathcal{L} (f; P) = \mu (A_n) \inf_{A_N} f + \mu (X \setminus A_N) \inf_{X \setminus A_N} f \geq \mu (A_n) \frac{1}{N} > 0.$$
+\end{proof}
 \end{document}
