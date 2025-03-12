@@ -1,0 +1,105 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eq}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\al}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\qeq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\qal}[1]{\begin{align}#1\end{align}}
+\title{Problem Set 5}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+\begin{center}
+    I adhered to the honor code on this assignment. \\
+\end{center}
+\newpage
+\
+\newpage
+\subsection*{3A.10}
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $f_1, f_2, \ldots$ is a sequence of nonnegative $\mathcal{S}$-measurable functions. Define $f : X \to [0, \infty]$ by $f(x) = \sum_{k=1}^\infty f_k(x)$. Prove that \eq{\int f ~d \mu = \sum_{k=1}^\infty \int f_k ~d \mu.}
+
+\begin{proof}
+
+    Let $(g_n)_{n \in \N}$ be a sequence of functions defined by
+    \eq{g_n(x) = \sum_{k=1}^{n} f_k (x).} Then $g_n$ is monotone increasing and converges to $f$ pointwise. Therefore by the monotone convergence theorem, we have \al{\int f ~d \mu &= \lim_{n \to \infty} \int g_n ~d \mu \\
+                      &= \lim_{n \to \infty} \sum_{k=1}^{n} f_k ~d \mu \\
+                      &= \lim_{n \to \infty} \sum_{k=1}^{n} \int f_k ~d \mu \\
+                      &= \sum_{k=1}^{\infty} \int f_k ~d \mu.}
+    The third inequality falls from linearity of the integral over finite sums.
+\end{proof}
+
+\subsection*{3A.15}
+Suppose $\lambda$ is Lebesque measure on $\R$ and $f : \R \to [-\infty, \infty]$ is a Borel measurable function such that $\int f ~d \lambda$ is defined.
+
+\begin{itemize}
+    \item[(a)] For $t \in \R$, define $f_t : \R \to [-\infty, \infty]$ by $f_t(x) = f(x - t)$. Prove that $\int f_t ~d \lambda = \int f ~d \lambda$ for all $t \in \R$.
+    \begin{proof}
+        Both $f$ and $f_t$ are Borel measurable functions, so there exists $(\varphi_n)_{n in \N}$ and $(\varphi_n^t)_{n \in \N}$, sequences of simple functions such that $\varphi_n \to f$ and $\varphi_n^t \to f_t$ pointwise. Then by the monotone convergence theorem, we have \qeq{\int f ~d \lambda = \lim_{n \to \infty} \int \varphi_n ~d \lambda ~ \text{ and } ~ \int f_t ~d \lambda = \lim_{n \to \infty} \int \varphi_n^t ~d \lambda. \label{eq:1}} But because $\varphi_n$ and $\varphi_n^t$ are simple functions for all $n \in \N$, then for all $n \in \N$, there exists $c_1, \ldots, c_K \in \R$ and $E_1, \ldots, E_k \in \mathcal{B}(\R)$ such that 
+        \al{\lim_{n \to \infty} \int \varphi_n ~d \lambda 
+                &= \lim_{n \to \infty} \int \sum_{k=1}^K c_k \chi_{E_k} ~d \lambda \\
+                &= \lim_{n \to \infty} \sum_{k=1}^{K} c_k \lambda(E_k) \\
+                &= \lim_{n \to \infty} \sum_{k=1}^{K} c_k \lambda(E_k + t) \\
+                &= \lim_{n \to \infty} \int \varphi_n^t ~d \lambda.}
+        Therefore, by \eqref{eq:1}, we have $\int f ~d \mu = \int f_t ~d \mu$.
+    \end{proof}
+    \item[(b)] For $t \in \R \setminus \{0\}$, define $f_t : \R \to [-\infty, \infty]$ by $f_t(x) = f(tx)$. Prove that $\int f_t ~d \lambda = \frac{1}{|t|}\int f ~d \lambda$ for all $t \in \R \setminus \{0\}$.
+    
+    \begin{proof}
+        As in part (a), there exist borel measurable functions $\varphi_n$ and $\varphi_n^t$ such that $\varphi_n \to f$ and $\varphi_n^t \to f_t$ pointwise. Then by the monotone convergence theorem, we have \qeq{\int f ~d \lambda = \lim_{n \to \infty} \int \varphi_n ~d \lambda ~ \text{ and } ~ \int f_t ~d \lambda = \lim_{n \to \infty} \int \varphi_n^t ~d \lambda. \label{eq:2}} But because $\varphi_n$ and $\varphi_n^t$ are simple functions for all $n \in \N$, then for all $n \in \N$, there exists $c_1, \ldots, c_K$ and $E_1, \ldots, E_k \in \mathcal{B}(\R)$ such that
+        \al{\frac{1}{|t|}\lim_{n \to \infty} \int \varphi_n ~d \lambda
+            &= \frac{1}{|t|} \lim_{n \to \infty} \int \sum_{k=1}^{K} c_k \chi_{E_k} ~d \lambda \\
+            &= \frac{1}{|t|} \lim_{n \to \infty} \sum_{k=1}^{K} c_k \lambda(E_k) \\
+            &= \frac{1}{|t|} \lim_{n \to \infty} \sum_{k=1}^{K} c_k |t| \lambda(E_k \cdot \frac{1}{|t|}) \\
+            &= \lim_{n \to \infty} \sum_{k=1}^{K} c_k \lambda(E_k \cdot \frac{1}{|t|}) \\
+            &= \lim_{n \to \infty} \int \varphi_n^t ~d \lambda.}
+    \end{proof}
+    Therefore, by \eqref{eq:2}, we have $\int f ~d \lambda = \frac{1}{|t|} \int f_t ~d \lambda$.
+\end{itemize}
+
+\subsection*{3A.17}
+
+Suppose that $(X, \mathcal{S}, \mu)$ is a measure space and $f_1, f_2, \ldots$ is a sequence of non-negative $\mathcal{S}$-measurable functions on $X$. Define a function $f : X \to [0, \infty]$ by $f(x) = \liminf_{k \to \infty} f_k(x)$.
+
+\begin{itemize}
+    \item[(b)] Prove that \eq{\int f ~d \mu \leq \liminf_{k \to \infty} \int f ~d \mu.}
+    
+    \begin{proof}
+        Let $(g_n)_{n \in \N}$ be a sequence of functions defined by \eq{g_n (x) = \inf \{f_n(x), f_{n+1}(x), \ldots\}.} Then $g_n \to f$ pointwise, and $g_n$ is monotone increasing. Therefore by the monotone convergence theorem, we have \al{\int f ~d \mu &= \lim_{n \to \infty} \int g_n ~d \mu \\
+                          &\leq \liminf_{k \to \infty} \int f_k ~d \mu.}
+    \end{proof}
+
+    \item[(c)] Give an example showing that the inequality in (b) can be a strict inequality even when $\mu(X) < \infty$ and the family of functions $\{f_k\}_{k \in \N}$ is uniformly bounded.
+    
+    \begin{proof}
+        Let $(f_n)_{n \in \N}$ be a sequence of functions defined by $f_n = \chi_{[0,\frac{1}{2}]}$ if $n$ is odd and $f_n = \chi_{[\frac{1}{2}, 1]}$ if $n$ is even. Then $X = [0, 1]$ has finite measure, and $(f_n)_{n \in \N}$ is uniformly bounded. Also, let $f : X \to [0, \infty]$ be defined by $f(x) = \liminf_{k \to \infty} f_k (x)$. Then \eq{\int f ~d \mu = \int \lim_{k \to \infty} \inf_{j \geq k} f_j ~d \mu.} But this is 0 because the limit in the right integral is 0. However, $\liminf_{k \to \infty} \int f ~d \mu = \frac{1}{2}$.
+    \end{proof}
+\end{itemize}
+
+\subsection*{Additional Problem 1}
+
+Suppose $f : [a, b] \to \R$ is a bounded function. For $n \in \N$, let $P_n$ denote the partition that divides $[a, b]$ into $2^n$ intervals of equal size. Prove that \eq{L(f, [a,b]) = \lim_{n\to\infty} L(f, P_n, [a,b]) \text{ and } U(f, [a,b]) = \lim_{n \to \infty} U(f, P_n, [a,b]).}
+
+\begin{proof}
+    Without loss of generality, let $[a,b] = [0,1]$. Then because the dyadic rationals are dense in $[0, 1]$ the upper and lower riemann sums are the same if taken over the infimum and supremum respectively over only partitions of dyadic rational endpoints. Then for any partition $P$ with only dyadic rational endpoints, we know that eventually in $\N$, $P_n$ is a finer partition than $P$. Therefore eventually in $\N$, \eq{L(f, P, [0,1]) \leq L(f, P_n, [0,1]) \text{ and } U(f, P, [0,1]) \geq U(f, P_n, [0,1]).} Because this holds true for all partitions $P$, we know \eq{L(f, [0,1]) \leq \lim_{n \to \infty} L(f, P_n, [0,1]) \text{ and } U(f, [0,1]) \geq \lim_{n \to \infty} U(f, P_n, [0,1]).} The other side of the inequality holds by definition, so the claim is proven.
+\end{proof}
+
+\subsection*{Additional Problem 2}
+
+Let $(X, \mathcal{S}, \mu)$ be a measure space and suppose that $(f_n)_{n \in \N}$ is a sequence of measurable functions on $(X, \mathcal{S}, \mu)$ with values in $[0, +\infty]$. Suppose that $f := \lim_{n \to \infty} f_n$ exists pointwise with $\int f~ d \mu < + \infty$, and that one also has \eq{0 \leq f_n \leq f \text{, for all } n \in \N.} Then, the limit \eq{\lim_{n \to \infty} \int f_n ~d \mu \text{ exists}} and one can interchange limits and integral, i.e., \eq{\lim_{n \to \infty} \int f_n ~d \mu = \int f ~d \mu.}
+
+\begin{proof}
+    The sequence $(\int f_n ~d \mu)_{n \in \N}$ converges if and only if \eq{\limsup_{n \to \infty} \int f_n ~d \mu = \liminf_{n \to \infty} \int f_n ~d \mu.} We know by definition that $\limsup_{n \to \infty} f_n \geq \liminf_{n \to \infty} f_n$. For the proof of the other direction of the inequality, first observe that $f_n \leq f$ for all $n \in \N$. Then $\int f_n ~d \mu \leq \int f_n ~d \mu$, so $\sup \int f_n ~d \mu \leq \int f ~d \mu$. Therefore $\limsup_{n \to \infty} \int f_n ~d \mu \leq \int f ~d \mu$. Now we can apply Fatou's lemma to say $\limsup_{n \to \infty} \int f_n ~d \mu \leq \liminf_{n \to \infty} \int f_n ~d \mu$. Therefore $\lim_{n \to \infty} \int f_n ~d \mu$ exists.
+
+    For the second part of this proof, observe that $f_1, f_2, \ldots$ are measurable functions, and $f_n \to f$, so $f$ is measurable. Also, $\int f ~d \mu < \infty$ and $|f_n| \leq f$ for all $n \in \N$. Therefore, by the dominated convergence theorem, we have \eq{\lim_{n \to \infty} \int f_n ~d \mu = \int f ~d \mu.}
+\end{proof}
+\end{document}
