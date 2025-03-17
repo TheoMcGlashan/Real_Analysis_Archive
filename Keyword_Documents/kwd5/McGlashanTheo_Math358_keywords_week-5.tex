@@ -1,0 +1,40 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eq}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\al}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\qeq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\qal}[1]{\begin{align}#1\end{align}}
+\title{Keyword Document 5}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+
+\subsection*{Key Result 1: Hardy-Littlewood Maximal Inequality}
+
+Suppose $\mathcal{L} \in \R$. Then \eq{|\{b \in \R : h^*(b) > c\}| \leq \frac{3}{c} ||h||_1} for every $c > 0$.
+
+This is a very useful tool in several of the proofs in this section. The Hardy-Littlewood Maximal Function $h^*$ is a bit strange, but it generally takes values close to the value of the function $h$. This inequality tells us that the measure of the set of points where h* is greater than some constant $c$ is at most $\frac{3}{c}$ times the $\mathcal{L}^1$ norm of $h$. This is used to prove the first version of the Lebesque Differentiation Theorem in the next section. This result is on page 105 of the book.
+
+\subsection*{Key Result 2: Lebesque Differentiation Theorem}
+
+Suppose $f \in \mathcal{L}^1(\R)$. Define $g : \R \to \R$ by \eq{g(x) = \int_{-\infty}^{\infty} f.} Then $g'(b) = f(b)$ for almost every $b \in \R$.
+
+This is an important extension of the fundamental theorem of calculus that gets rid of the need for $f$ to be continuous at $b$. This is extremely powerful because we can now differentiate the integral of a function that is nowhere continuous and know that almost everywhere we do not run into any problems. In the book, this result is used immediately to prove that there does not exist a set that constitutes exactly half of every interval. This result is on page 111 of the book.
+
+\subsection*{Key Technique: Adding and Subtracting Like Terms}
+
+The fairly common technique from 301 made an appearance in these readings, on page 109 when $h_k, -h_k, h_k(b), -h_k(b)$ terms were added to an integral during the proof of the first version of the Lebesque Differentiation Theorem. This technique pairs quite well with the triangle inequality, which was used here to group pairs of terms in absolute values inside of an integral and then individually bound the pairs of terms. I think that this technique will be very useful going forward, as a function in an absolute value inside of an integral is common because that is the $\mathcal{L}^1$ norm of the function, and this structure lends itself to this technique if the goal is to bound it.
+\end{document}
+
+
