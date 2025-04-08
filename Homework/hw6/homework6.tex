@@ -1,0 +1,160 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eq}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\al}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\qeq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\qal}[1]{\begin{align}#1\end{align}}
+\title{Problem Set 6}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+
+\begin{center}
+    I adhered to the honor code on this assignment.
+\end{center}
+
+\newpage
+\
+\newpage
+
+\subsection*{Additional Problem 1}
+
+$Claim.~$ For every measurable function $f$ supported in $[-R, R]$ for some $0 < R < +\infty$, we have 
+\eq{f^*(x) \geq \frac{1}{2(|x| + R)} \|f\|_1, \text{ for every } x \in \R.}
+
+\begin{proof}
+    Begin by fixing $0 < R < +\infty$, and a measurable function $f$ supported on $[-R, R]$. Then take $x \in \R$. Then,
+
+    \qal{ f^*(x) &= \sup_{h > 0} \frac{1}{2h} \int_{[x-h, x+h]} |f(t)|~dt \nonumber \\
+    & \geq \frac{1}{2(|x| + R)} \int_{[x - |x| - R, x + |x| + R]} |f(t)| ~dt \label{eq:6} \\
+    & \geq \frac{1}{2(|x| - R)}\int_{[-R, R]} |f(t)| ~dt \nonumber \\
+    & = \frac{1}{2(|x| - R)} \|f\|_1 \label{eq:7}.}
+    For above, the inequality in \eqref{eq:6} comes from substituting the supremum over all $h$ for the value $h = 2(|x| + R)$. The equality in \eqref{eq:7} comes from the fact that $f$ is 0 outside of $[-R, R]$.
+
+    This proves the claim. Furthermore, this leads to logarithmic divergence of the $\mathcal{L}^1$-norm for $f^*$. To see this, use the above inequality:
+    \eq{\int |f^*(x)| ~dx \geq \int \frac{1}{2(|x| + R)}\|f\|_1~ dx \geq \frac{1}{2} \|f\|_1 \int \frac{1}{|x| + R} ~dx.}
+    As $R$ is a constant, the final integral above evaluates to a logarithmic function, so $\|f^*\|_1$ is not finite.
+\end{proof}
+
+\subsection*{Additional Problem 2}
+
+Let $(X, \mathcal{S}, \mu)$ be a measure space.
+
+\textbf{Theorem.}~ Let $(f_n)$ be a sequence of measurable functions. Then, $(f_n)$ is Cauchy in measure if and only if $(f_n)$ converges in measure.
+
+We know that convergence in measure implies Cauchy in measure, so we need only to prove the other implication.
+\begin{itemize}
+    \item [(a)] We will first show that for a sequence $(f_n)$ that is cauchy in measure, $(f_n)$ converges in measure if there exists a subsequence $(f_{n_k})$ that converges in measure.
+    
+    \begin{proof}
+        Let $\epsilon, \eta > 0$. Then for our sequence $(f_n)$, we assume that there exists a subsequence $(f_{n_k})$ that converges in measure. This tells us that there exists $N_1 \in \N$ such that for all $n_k \geq N_1$, we have
+        \qeq{\mu(\{|f_{n_k} - f| > \eta\}) < \epsilon. \label{eq:1}}
+        Additionally, we know from the fact that $(f_n)$ is Cauchy in measure that there exists $N_2 \in \N$ such that for all $n, m \geq N_2$, we have
+        \qeq{\mu(\{|f_n - f_m| > \eta\}) < \epsilon. \label{eq:2}}
+        Now we let $N = \max\{N_1, N_2\}$. Then, for all $n, m _k\geq N$, we have
+        \qal{\mu(\{|f_n - f| > \eta\}) &= \mu(\{|f_n - f_{m_k} + f_{m_k} - f| > \eta\}) \nonumber \\
+        &\leq \mu(\{|f_n - f_{m_k}| + |f_{m_k} - f| > \eta\}) \nonumber \\
+        &\leq \mu(\{|f_n - f_{m_k}| > \eta\}) + \mu(\{|f_{m_k} - f| > \eta\}). \label{eq:4}}
+        Examining \eqref{eq:4} we see that the first term is bounded by $\epsilon$ because of \eqref{eq:2}, and the second term is bounded by $\epsilon$ because of $\eqref{eq:1}$. Therefore the whole inequality is bounded by $2 \epsilon$, so we have convergence of $(f_n)$ in measure.
+    \end{proof}
+
+    \item [(b)] We know that because $(f_n)$ is Cauchy in measure, there exists a subsequence $(f_{n_k})$ of $(f_n)$ such that $f_{n_k} \to f ~\mu$-a.e., for some function $f$. We will now prove that $f_{n_k} \to f$ in measure, which completes the proof of the theorem.
+    
+    \begin{proof}
+        Let $\epsilon, \eta > 0$. We will begin by looking at $n_k \geq N$, where $N \in \N$ is taken such that for all $n, m \geq N$, because $(f_n)$ is Cauchy in measure, we have
+        \qeq{\mu(\{|f_n - f_m| > \eta\}) < \epsilon. \label{eq:9}} Then because $f_{n_k} \to f ~ \mu$-a.e., we know that up to a set of 0 measure, we have
+        \qeq{|f_{n_k} - f| > \eta \implies |f_{n_k} - f_{n_l}| > \eta, \text{ eventually in $l$. \label{eq:3}}}
+        Therefore all $f_{n_k}(x)$ satisfying the left side also satisfy the right of \eqref{eq:3}, so
+        \qal{\{|f_{n_k} - f| > \eta\} &\overset{\mu-a.e.}{\subseteq} \{|f_{n_k} - f_{n_l}| > \eta\}, \text{ eventually in $l$} \nonumber \\
+        &\overset{\mu-a.e.}{\subseteq} \bigcup_{L \in \N} \bigcap_{l \geq L} \{|f_{n_k} - f_{n_l}| > \eta\}. \label{eq:5}}
+        For above, \eqref{eq:5} comes from the definition of a property holding eventually. But as $L$ increases, we are taking an intersection over less sets, so \eqref{eq:5} is a union of nested increasing sets. This lets us use our continuity properties to say
+        \qal{\mu(\{|f_{n_k} - f| > \eta\}) &\leq \lim_{L \to \infty} \mu \left( \bigcap_{l \geq L} \{|f_{n_k} - f_{n_l}| > \eta\}\right) \nonumber \\
+        &\leq \liminf_{L \to \infty} \mu(\{|f_{n_k} - f_{n_L}| > \eta\}) < \epsilon. \label{eq:10}}
+        The final bound by $\epsilon$ in \eqref{eq:10} comes from our original choice of $n_k$, which lets us use \eqref{eq:9}.
+    \end{proof}
+\end{itemize}
+
+\subsection*{Additional Problem 3}
+
+Let $(M, d)$ be a fixed metric space.
+
+\begin{itemize}
+    \item [(a)] $Claim.~$ $(x_n)$ is Cauchy in $(M, d)$ if and only if
+    \eq{\text{diam}(\{x_k, k \geq n\}) \to 0 \text{ , as } n \to \infty.}
+    Here given $\emptyset \neq A \subseteq M$, we define the diameter of $A$ as
+    \eq{\text{diam}(A) := \sup_{x, y \in A} d(x, y) \in [0, +\infty].}
+
+    $(\implies)~ $ For the forward direction, assume that $(x_n)$ is Cauchy in $(M, d)$. Then let $\epsilon > 0$. Because of our assumption, we know that there exists $N \in \N$ such that for all $n, m \geq N$, we have \qeq{d(x_n, x_m) < \epsilon. \label{eq:8}}
+    Therefore, letting $A_n := \{x_k : k \geq n\}$, we have that for $n \geq N$,
+    \eq{\text{diam}(A_n) = \sup_{x, y \in A_n} d(x, y) \leq \epsilon.}
+    The final inequality above follows from \eqref{eq:8}. This completes the forward direction.
+
+    $(\impliedby)~ $ For the backward direction, assume diam$(A_n) \to 0$ as $n \to \infty$. Then let $\epsilon > 0$. We know from our assumption that there exists $N \in \N$ such that for $n \geq N$, we have
+    \eq{\text{diam}(A_n) = \sup_{x, y \in A_n} d(x, y) < \epsilon.}
+    Therefore for $n, m \geq N$, we know
+    \eq{d(x_n, x_m) \leq \sup_{x, y \in A} d(x, y) \leq \epsilon.}
+
+    \item [(b)] $Claim.~$ If $(x_n)$ is Cauchy, then there exists a subsequence $(x_{n_k})$ of $(x_n)$ such that
+    \eq{d(x_{n_{k+1}}, x_{n_k}) < \frac{1}{2^k} \text{ , for all } k \in \N.}
+
+    \begin{proof}
+        We will prove the existence of this subsequence by inductively constructing it.
+
+        \textbf{Base Case:} Assume that $k = 1$. Then because $(x_n)$ is Cauchy, part (a) lets us chose $n_1, n_2 \in \N$ with $n_2 > n_1$ such that
+        \eq{d(x_{n_2}, x_{n_1}) \leq \sup_{x, y \in A_{n_1}} d(x, y) < \frac{1}{2^k} = \frac{1}{2}.}
+        Then we let $x_{n_1}, x_{n_2}$ be the first two elements of our sequence.
+
+        \textbf{Inductive Case:} Assume that for all $k < q \in \N$, we have
+        \eq{d(x_{n_k+1}, x_{n_k}) < \frac{1}{2^k}.}
+        Then we have constructed elements $x_{n_1}, \dots x_{n_{q-1}}$ of our sequence. To add $x_{n_q}$, we know from (a) that there exists $N \in \N$ such that for all $n \geq N$, we have
+        \eq{\text{diam}(A_n) < \frac{1}{2^q}.}
+        Then if we let $n_{q+1} = \max\{N, n_q + 1\}$, we know
+        \eq{d(x_{n_{q+1}}, x_{n_q}) \leq \sup_{x, y \in A_{n_q}} d(x, y) = \text{ diam}(A_q) < \frac{1}{2^q}.}
+        Therefore $x_{n_q}$ is the next element in our sequence.
+    \end{proof}
+\end{itemize}
+
+\subsection*{Additional Problem 4}
+
+Let $f \in \mathcal{L}^1(\R, dx)$ be fixed. We then know that for all $t \in \R$,
+\eq{\int_{-\infty}^{+\infty} f(x) ~dx = \int_{-\infty}^{+\infty} f(x+t) ~dx.}
+
+$Claim.~$ For a bounded, measurable function $g$, we know
+\qeq{\lim_{t \to 0} \int_{-\infty}^{+\infty}|g(x) [f(x) - f(x+t)]| ~dx = 0. \label{eq:11}}
+
+\begin{proof}
+    We will first prove \eqref{eq:11} in the case that our function $f \in \mathcal{C}_c (\R)$ meaning $f$ is compactly supported and continuous, then extend this result to all $\mathcal{L}^1$ functions. Assume that $f$ is supported on $[-R, R]$ for some $R \in \R$.
+
+    Then, let $\epsilon > 0$. Because $f$ is continuous on a compact domain, it is uniformly continuous. Therefore there exists $1 >\delta > 0$ such that
+    \eq{|x - y| < \delta \implies |f(x) - f(y)| < \epsilon.}
+    We assume $\delta < 1$ here for use later in the proof. Then for $|t| < \delta$, we have
+    \qeq{|f(x) - f(x + t)| < \epsilon. \label{eq:13}}
+    Now examining the integral in \eqref{eq:11} because $g$ is bounded, we know $|g| < M$ for some $M \in \R$. Therefore again for $|t| < \delta$, we have
+    \qal{\int_{-\infty}^{+\infty} |g(x) [f(x) - f(x - t) ]| ~dx &\leq M \int_{-\infty}^{+\infty} |f(x) - f(x+t)| ~dx \nonumber \\
+    &\leq M \int_{-R - 1}^{R + 1} |f(x) - f(x + t)| ~dx \label{eq:12}\\
+    &\leq M \int_{-R - 1}^{R + 1} \epsilon ~dx \label{eq:14} \\
+    &\leq M \epsilon (2R + 2). \nonumber}
+    For above, the change of the integration bounds in \eqref{eq:12} comes from the finite support of $f$ on $[-R, R]$. Here we expand the interval by 1 on either side, as $|t| < \delta < 1$, so $f(t)$ can be supported on $(-R - 1, R + 1)$. The inequality in \eqref{eq:14} comes from \eqref{eq:13}.
+
+    This completes the proof for the case when $f \in \mathcal{C}_c(\R)$. To extend to the general case of $f \in \mathcal{L}^1(\R, dx)$ first let $\epsilon > 0$. Then, use the fact that for $f \in \mathcal{L}^1$, there exists $\phi \in \mathcal{C}_c (\R)$ such that 
+    \qeq{\|f - \phi\| < \epsilon. \label{eq:17}}
+    Now examining our integral from \eqref{eq:11}, we have
+    \qal{& \int_{-\infty}^{+\infty} |g(x) [f(x) - f(x - t)]| ~dt \nonumber \\
+    &= \int_{-\infty}^{+\infty} |g(x) [f(x) - \phi(x) + \phi(x) - \phi(x - t) + \phi(x - t) - f(x - t)]| ~dt \nonumber \\
+    &\leq \int_{-\infty}^{+\infty} |g(x) (f(x) - \phi(x))| ~dx + \int_{-\infty}^{+\infty} |g(x)(\phi(x) - \phi(x - t))| ~dx \label{eq:15} \\ & \hspace{5em}+ \int_{-\infty}^{+\infty} |g(x) (\phi(x - t) - f(x - t))| ~dt \nonumber \\
+    &\leq M \int_{-\infty}^{+\infty} |f(x) - \phi(x)| ~dx + M \int_{-\infty}^{+\infty} |\phi(x) - \phi(x - t)| ~dx \label{eq:16} \\ & \hspace{5em}+ M \int_{-\infty}^{+\infty} |\phi(x - t) - f(x - t)| ~dt \nonumber}
+    For the inequality beginning in \eqref{eq:15}, we have distributed $g(x)$, then used the triangle inequality and linearity of integrals to group terms and separate into multiple integrals. For \eqref{eq:16}, observe that the first and last integrals are bounded by $M \epsilon$ because of \eqref{eq:17}. The second term is exactly our case where $\phi \in \mathcal{C}_c(\R)$, so by the first part of this proof, for sufficiently small $|t|$, we have a bound by $M \epsilon(2R +2)$ for $R \in \R$ dependent on the support of $\phi$. Therefore our whole expression is bounded by $2M \epsilon + M^2 \epsilon(2R + 2)$, so \eqref{eq:11} holds for $f \in \mathcal{L}^1$.
+\end{proof}
+
+\end{document}

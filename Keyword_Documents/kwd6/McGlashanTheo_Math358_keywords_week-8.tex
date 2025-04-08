@@ -1,0 +1,45 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eq}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\al}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\qeq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\qal}[1]{\begin{align}#1\end{align}}
+\title{Keyword document week 8}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+
+Chapter 7 page 194-197, Chapter 6 page 147-161, page 163-169.
+
+\subsection*{Key Result 1: Continuity}
+
+For metric spaces $(V, d_V)$ and $(W, d_W)$, function $T : V \to W$ is continuous at $f \in V$ if for every $\epsilon > 0$, there exists $\delta > 0$ such that
+\eq{d_W(T(f), T(g)) < \epsilon}
+for all $g \in V$ with $d_v(f, g) < \delta$.
+
+The function is called continuous if $T$ is continuous at $f$ for all $f \in V$.
+
+This is a very important and fundamental definition for analysis that we have already been using to some extent throughout the semester. It is presented more generally here, as we have been working specifically for the standard distance metric on $\R$, and proving functions are continuous for that metric. This definition is on page 150 in the book.
+
+\subsection*{Key Result 2: Holder's Inequality}
+
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space, $1 \leq p \leq \infty$, and $f, h : X \to \R$ are $\mathcal{S}$-measurable. Then
+\eq{\|fh\|_1 \leq \|f\|_p\|h\|_{p'}.}
+
+This is a very useful Inequality to prove further statements related to norms of functions. It is used on page 198 and 199 in the proof of Minkowski's Inequality, and we have used it for proofs in class. It is found on page 196 of the textbook.
+
+\subsection*{Key Strategy: Linearity of Integrals}
+
+Many proofs we have done already involve a key step where one integral is separated using linearity of integrals into multiple integrals. This is used several times in section 6B, as this section talks about complex functions, which can be decomposed into a real and an imaginary term, which can then be broken up into two separate integrals. This was also a key part of additional problem 4 from this week's problem set.
+\end{document}
