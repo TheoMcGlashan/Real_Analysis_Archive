@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eq}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\al}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\qeq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\qal}[1]{\begin{align}#1\end{align}}
+\title{Problem Set 7}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+
+\begin{center}
+    I adhered to the honor code on this assignment
+\end{center}
+
+\newpage
+\
+\newpage
+
+\subsection*{7A.14}
+
+$\mathbf{Claim.}~$ For $p, q \in (0, \infty]$ with $p \neq q$, neither of the sets $\mathcal{L}^p(\R)$ and $\mathcal{L}^q(\R)$ is a subset of the other.
+
+\begin{proof}
+    Begin by fixing $p, q \in (0, \infty]$. Without loss of generality, we may assume that $p > q$. We will then show that there exists both a function $f$ such that $f \in \mathcal{L}^p$ and $f \notin \mathcal{L}^q$, and a function $g$ such that $g \in \mathcal{L}^q$ and $g \notin \mathcal{L}^p$.
+
+    \eq{f(x) := x^\frac{-2}{p+q} \chi_{[1, +\infty)}, ~~~g(x) := x^\frac{-2}{p+q} \chi_{[0, 1]}}
+    For this $f$, assuming that $p < +\infty$, we have 
+    \eq{\|f\|_p = \left( \int_{1}^{+\infty} |x^\frac{-2p}{p+q}|\right)^\frac{1}{p} = \lim_{t \to \infty} \left( \frac{1}{1-\frac{2p}{p+q}} x^{1-\frac{2p}{p+q}} \right)^\frac{1}{p} \Biggr]_1^t = \lim_{t \to \infty} \left(\frac{1}{1-\frac{2p}{p+q}} t^{1-\frac{2p}{p+q}} - \frac{1}{1- \frac{2p}{p+q}}\right)^\frac{1}{p}.}
+    The final limit from above is quite cluttered, but the important part is $\lim_{t \to \infty} t^{1-\frac{2p}{p+q}}$. The rest of the limit has no $t$, so it is constant. Because $p > q$, we know $1-\frac{2p}{p+q} < 0$, so this limit is finite. Therefore $\|f\|_p < +\infty$, so $f \in \mathcal{L}^p(\R)$. 
+    
+    If $p = +\infty$, then $f(x)$ is bounded, so $\|f\|_\infty < +\infty$, so $f \in \mathcal{L}^p(\R)$. However,
+    \eq{\|f\|_q = \left( \int_{1}^{+\infty} |x^\frac{-2q}{p+q}|\right)^\frac{1}{q} = \lim_{t \to \infty} \left( \frac{1}{1-\frac{2q}{p+q}} x^{1 - \frac{2q}{p+q}}\right)^\frac{1}{q} \Biggr]_1^t = \lim_{t \to \infty} \left(\frac{1}{1-\frac{2q}{p+q}} t^{1-\frac{2q}{p+q}} - \frac{1}{1- \frac{2q}{p+q}}\right)^\frac{1}{q}.}
+    Again, the important part of the final limit above is $\lim_{t \to \infty} t^{1-\frac{2q}{p+q}}$. In this case, we have $1-\frac{2q}{p+q} > 0$, so this limit diverges as $t \to \infty$. Therefore $f \notin \mathcal{L}^q(\R)$, so $\mathcal{L}^p \not\subseteq \mathcal{L}^q.$
+
+    Now for $g$ as defined before, assuming $p < +\infty$, we have
+    \eq{\|g\|_p = \left( \int_{0}^{1} |x^\frac{-2p}{p+q}|\right)^\frac{1}{p} = \lim_{t \to 0} \left( \frac{1}{1-\frac{2p}{p+q}} x^{1-\frac{2p}{p+q}} \right)^\frac{1}{p} \Biggr]_t^1 = \lim_{t \to 0} \left(\frac{1}{1- \frac{2p}{p+q}} -\frac{1}{1-\frac{2p}{p+q}} t^{1-\frac{2p}{p+q}}\right)^\frac{1}{p} .}
+    Once again, the relevant part is $\lim_{t \to 0} t^{1-\frac{2p}{p+q}}$. Here again $1 - \frac{2p}{p+q} < 0$, but then this limit diverges. Therefore $g \notin \mathcal{L}^p(\R)$. 
+    
+    If $p = +\infty$, then $g(x)$ is not bounded, so $\|g\|_\infty = + \infty$, so $g \notin \mathcal{L}^p(\R)$. However,
+    \eq{\|g\|_q = \left( \int_{0}^{1} |x^\frac{-2q}{p+q}|\right)^\frac{1}{q} = \lim_{t \to 0} \left( \frac{1}{1-\frac{2q}{p+q}} x^{1-\frac{2q}{p+q}} \right)^\frac{1}{q} \Biggr]_t^1 = \lim_{t \to 0} \left(\frac{1}{1- \frac{2q}{p+q}} -\frac{1}{1-\frac{2q}{p+q}} t^{1-\frac{2q}{p+q}}\right)^\frac{1}{q} .}
+    Now for $\lim_{t \to 0} t^{1- \frac{2q}{p+q}}$, we have $1- \frac{2q}{p+q} > 0$, so this limit is finite. Then $\|g\|_q < + \infty$, so $g \in \mathcal{L}^q(\R)$. Therefore $\mathcal{L}^q \not\subseteq \mathcal{L}^p$.
+
+    For the case where $p = +\infty$, we have
+\end{proof}
+
+\subsection*{7A.16}
+
+$\mathbf{Claim.}~$ For a finite measure space $(X, \mathcal{S}, \mu)$ and $\mathcal{S}$-measurable function $f : X \to \R$, we have 
+\eq{\lim_{p \to \infty} \|f\|_p = \|f\|_\infty.}
+
+\begin{proof}
+    We know from class that $\|f\|_p \leq \|f\|_\infty \cdot \mu(X)^\frac{1}{p}$, for all $1 \leq p < +\infty$. Therefore
+    \eq{\lim_{p \to \infty} \|f\|_p \leq \lim_{p \to \infty}\|f\|_\infty \cdot \mu(X)^\frac{1}{p} = \|f\|_\infty}
+    where the equality above follows from (2) in additional problem 1 because $\mu(X) < + \infty$.
+
+    Therefore we need only to show
+    \qeq{\lim_{p \to \infty} \|f\|_p \geq \|f\|_\infty. \label{eq:1}} 
+    We will first show that for $\epsilon > 0$, there exists $A \in \mathcal{S}$ such that
+    \qeq{|f(x)| \geq \|f\|_\infty - \epsilon \text{ , for all } x \in A. \label{eq:2}}
+    We will use this to prove \eqref{eq:1}. To begin, note that
+    \eq{\|f\|_\infty = \inf B \text{ , where } B :=\{ t > 0 : \mu(\{ x \in X : |f(x)| > t\}) = 0\}.}
+    Then fix $\epsilon > 0$. If $t^* := \|f\|_\infty - \epsilon$, we can then define
+    \eq{A = \{x \in X : |f(x)| > t^*\}.} Then $\mu(A) > 0$, because if not, then $t^*$ would be the infimum of $B$. But now by definition we have \eqref{eq:2} for this $A$, which is also clearly in $\mathcal{S}$.
+
+    Now examining $\|f\|_p$, we have
+    \eq{\|f\|_p^p = \int |f|^p ~d\mu \geq \int_A |f|^p ~d \mu \geq \int_A (\|f\|_\infty - \epsilon)^p ~d \mu = \mu(A)(\|f\|_\infty - \epsilon)^p.}
+    Here the second inequality follows from \eqref{eq:2}, and the final equality comes from the integrand on the left side of the equality being a constant. But the above implies
+    \eq{\lim_{p \to \infty} \|f\|_p \geq \lim_{p \to \infty} (\mu(A)(\|f\|_\infty - \epsilon)^p)^\frac{1}{p} = \lim_{p \to \infty} \mu(A)^\frac{1}{p} (\|f\|_\infty - \epsilon) = \|f\|_\infty - \epsilon}
+    with the last equality again following from (2) of additional problem 1.
+    Therefore for all $\epsilon > 0$, we have
+    \eq{\|f\|_\infty - \epsilon \leq \lim_{p \to \infty} \|f\|_p \leq \|f\|_\infty}
+    which implies
+    \eq{\|f\|_\infty = \lim_{p \to \infty} \|f\|_p.}
+\end{proof}
+
+\subsection*{Additional Problem 2}
+
+\begin{itemize}
+    \item [(a)] $\mathbf{Claim.}~$ Let $0 < p_0 < p_1 < +\infty$ be fixed and suppose $f \in \mathcal{L}^{p_0} \cup \mathcal{L}^{p_1}$. Then for every $p \in (p_0, p_1)$, one has
+    \eq{\|f\|_p \leq \|f\|_{p_0}^{1-t} \cdot \|f\|_{p_1}^t,}
+    where $t \in (0, 1)$ satisfies
+    \eq{\frac{1}{p} = (1-t) \frac{1}{p_0} + t \frac{1}{p_1}.}
+    
+    \begin{proof}
+        For $f$ and $t$ as in our claim, we begin by separating $\|f\|_p^p$ using the fact that $p(1-t) - pt = p$.
+        \qeq{\|f\|_p^p = \int |f|^p ~d \mu = \int |f|^{p(1-p)} |f|^{pt} ~d\mu \label{eq:3}}
+        Now if we treat the final expression above as the $\mathcal{L}^1$-norm of the integrand, we know by \textit{holder} that
+        \eq{\|f^{p(1-t)}f^{pt}\|_1 \leq \|f^{p(1-t)}\|_\frac{p_0}{p(1-t)} \|f^{pt}\|_\frac{p_1}{pt}.}
+        Here we use our hypothesis to say $\frac{p(1-t)}{p_0} + \frac{pt}{p_1} = 1$. Equivalently to the above, we have
+        \al{\int |f|^{p(1-t)} |f|^{pt} ~d \mu &\leq \left( \int \left| f^{p(1-t)}\right|^\frac{p_0}{p(1-t)} ~d \mu\right)^\frac{p(1-t)}{p_0} \left( \int \left| f^{pt}\right|^\frac{p_1}{pt} ~d \mu \right)^\frac{pt}{p_1} \\
+        &= \left( \int |f|^{p_0} ~d \mu\right)^\frac{p(1-t)}{p_0} \left( \int |f|^{p_1} ~d \mu\right)^\frac{pt}{p_1} \\
+        &= \|f\|_{p_0}^{p(1-t)} \cdot \|f\|_{p_1}^{pt}}
+        In combination with \eqref{eq:3}, we now have
+        \eq{\|f\|_p^p \leq \|f\|_{p_0}^{p(1-t)} \cdot \|f\|_{p_1}^{pt}.}
+        Taking the $p$-th root of both sides gives us our claim.
+    \end{proof}
+
+    \item [(b)] For a fixed $d \in \N$, viewing $\R^d \subseteq \ell^p$, we know that for all $1 \leq p \leq +\infty$, we have
+    \eq{\|x\|_p \leq \|x\|_1 \text{ , for all } x \in \R^.}
+    \textbf{Claim.~} In addition to this, we have
+    \qeq{\|x\|_1 \leq d^{1 - \frac{1}{p}} \|x\|_p. \label{eq:4}}
+    In addition to this, for all $1 \leq p_1 \leq p_2 \leq \infty$, a sequence in $\R^d$ converges in $p_1$-norm if and only if it converges in $p_2$-norm.
+
+    \begin{proof}
+        To first prove \eqref{eq:4}, we begin by noting that because $x \in \R^d$, if we interpret $x$ as a sequence in $\ell^p$, then at most the first $d$ elements of $x$ can be nonzero (showing $x$ is indeed in $\ell^p$).
+
+        We then define the sequence $g$, where the $n$th element of $g$ is $\chi_{[1, d]}(n)$. This sequence is 1 for the first $d$ elements, and 0 afterwords, so it is in $\ell^p$. Then we can write
+        \eq{\|x\|_1 = \int |x| ~d \mu_\N = \int |g \cdot x| ~d \mu_\N.}
+        Using that $\frac{1}{p} +(1 - \frac{1}{p}) = 1$, we can apply \textit{holder} to the final expression above to get
+        \eq{\|x\|_1 \leq \left( \int |g|^\frac{1}{1- \frac{1}{q}} ~d \mu_\N \right)^{1-\frac{1}{p}} \left( \int |x|^p ~d \mu_\N\right)^\frac{1}{p} = d^{1-\frac{1}{p}} \|x\|_p.}
+        The final equality above is because $g$ is 1 for exactly $d$ elements.
+
+        To prove the second part of the claim, take a sequence $(x_n) \in \R^d$ that converges in $p_1$-norm. Assume that $(x_n) \to \alpha \in \R^d$ in $p_1$-norm as $n \to \infty$. Then by \eqref{eq:4}, we have
+        \qeq{\|x_n - \alpha\|_{p_1} \geq \frac{1}{d^{1-\frac{1}{p}}} \|x_n - \alpha\|_1. \label{eq:5}} Also, we know that $\|x\|_p \leq \|x\|_1$ for all $1 \leq p \leq \infty$, so 
+        \qeq{\frac{1}{d^{1-\frac{1}{p}}} \|x_n - \alpha\|_1 \geq \frac{1}{d^{1-\frac{1}{p}}} \|x_n - \alpha \|_{p_2} \label{eq:6}}
+        Because $(x_n) \to \alpha$ in $p_1$-norm, for $\epsilon > 0$, there exists $N \in \N$ such that for $n \geq N$, we have
+        \eq{\epsilon > \|x_n - \alpha\|_{p_1}}
+        Combining this with \eqref{eq:5} and \eqref{eq:6}, we get that for $n \geq N$ we have
+        \eq{d^{1-\frac{1}{p}} \epsilon > \|x_n - \alpha\|_{p_2}}
+        meaning that $(x_n) \to \alpha$ in $p_2$-norm as well. Because this conclusion does not rely on the fact that $p_1 \leq p_2$, we can conclude that a sequence that converges in $p_2$-norm also converges in $p_1$ norm.
+    \end{proof} 
+\end{itemize}
+
+\subsection*{Additional Problem 3}
+
+\begin{itemize}
+    \item [(a)] \textbf{Claim.}~ For all $0 < p < + \infty$ and for all $f \in \mathcal{L}^p$, there exists a sequence of simple functions with finite measure support $(\phi_n)$ such that 
+    \eq{\|\phi_n - f\|_p \to 0 \text{ , as } n \to \infty.}
+
+    \begin{proof}
+        Because $f$ is measurable, there exists a sequence of simple functions with finite measure support $(\phi_n)$ such that $|\phi_n| \nearrow |f|$ $\mu$-a.e. Then let $(g_n)$ be the sequence where $g_n := |\phi_n - f|^p$. Then again $\mu$-a.e., we have
+        \eq{g_n \leq 2^p(|\phi_n|^p + |f|^p) \leq 2^{p+1}|f|^p}
+        If we define $g = 2^{p+1}|f|^p$, then $|g_n| \leq g$ $\mu$-a.e. for all $n \in \N$. Also, because $f \in \mathcal{L}^p$, we know $\int g ~d \mu < +\infty$. Then we can use the dominated convergence theorem to say
+        \eq{\lim_{n \to \infty} \left( \int |\phi_n - f|^p ~d \mu\right)^\frac{1}{p} = \left( \int \lim_{n \to \infty} |\phi_n - f|^p ~d \mu\right)^\frac{1}{p} = 0.}
+    \end{proof}
+
+    \item [(b)] In $\ell^p$, finitely supported simple functions are sequences with finitely many nonzero elements.
+    
+    Elements in $\ell^\infty$ are sequences such that the supremum of their elements is bounded. Therefore the infinite sequence of all 1's is in $\ell^\infty$. However, because finitely supported simple functions in $\ell^\infty$ are sequences with finitely many nonzero elements and the sequence of all 1's has infinitely many nonzero elements, there is no sequence of finitely supported simple functions that converge in essential supremum to the sequence of all 1's. Therefore the result of (a) is false for $\ell^\infty$.
+\end{itemize}
+
+\end{document}
