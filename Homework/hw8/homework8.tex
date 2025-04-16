@@ -1,0 +1,193 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\usepackage{indentfirst}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eq}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\al}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\qeq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\qal}[1]{\begin{align}#1\end{align}}
+\newcommand{\loc}{\mathcal{L}^p_\text{loc} (\mu)}
+\newcommand{\elp}{\mathcal{L}^p (\mu)}
+\newcommand{\clc}{\mathcal{C}_c(\R)}
+\title{Problem Set 8}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+\begin{center}
+    I adhered to the honor code on this assignment.
+\end{center}
+\newpage
+\
+\newpage
+
+\subsection*{Additional Problem 1}
+
+Let $\mu$ be a regular Borel measure on $\R$ which is finite on all compact sets. Then for $0 < p < +\infty$, a measurable function $f : \R \to \C$ is locally $\mathcal{L}^p$ if for each $x \in \R$, there exists $r > 0$ such that
+\qeq{f \chi_{(x-r, x+r)} \in \mathcal{L}^p(\mu). \label{eq:1}}
+
+\begin{itemize}
+    \item [(a)] \textbf{Claim. } $f \in \loc$ if and only if 
+    \qeq{f \chi_K \in \mathcal{L}^p (\mu) \text{ , for every compact } K \subseteq \R \label{eq:2}.}
+
+    \begin{proof}
+        $(\impliedby)$ Assume \eqref{eq:2} holds for some function $f$. Then for $x \in \R$ and some $r(x) > 0$, we let $K$ be the compact set $[x-r, x+r]$. Then by our assumption,
+        \eq{\int |f \chi_{(x-r, x+r)}|^p \,d \mu \leq \int |f \chi_K| \,d \mu < +\infty.}
+        Therefore $f \in \loc$.
+
+        $(\implies)$ Assume that $f \in \loc$, and take $K \subseteq \R$ to be compact. Then for all $x \in K$, there exists $r(x) > 0$ satisfying \eqref{eq:1}. $K$ then has the open cover
+        \eq{K \subseteq \bigcup_{x \in K} (x-r(x), x + r(x)).}
+        Because $k$ is closed and bounded, there exists a finite collection $x_1, \dots x_n =: A$ such that
+        \eq{K \subseteq \bigcup_{x_i \in A} (x_i-r(x_i), x_i+r(x_i)) =:B.}
+        Using this finite open cover, we have
+        \eq{\int |f \chi_K|^p \,d \mu \leq \int |f \chi_B|^p \,d\mu \leq \sum_{i=1}^{n} \int |f \chi_{(x_i-r(x_i), x_i + r(x_i))}|^p \,d\mu < +\infty.}
+        Therefore $f\chi_K \in \mathcal{L}^p(\mu)$ for all compact $K \subseteq \R$.
+    \end{proof}
+    \item [(b)] The function $f : \R \to \C$ defined by $f(x) = 1$ is in $\loc$ but not in $\mathcal{L}^p (\mu)$. It is in $\loc$ because for any compact $K \subseteq \R$, we have
+    \eq{\int |f \chi_K|^p \,d\mu = \int \chi_K \,d\mu = \mu(K) < +\infty,} where the final inequality above is true by our hypothesis that $\mu$ is finite on all compact sets. Then by (a), $f \in \loc$.
+    However, $f \notin \mathcal{L}^p(\mu)$, because 
+    \eq{\|f\|_p = \left(\int 1 \,d\mu\right)^\frac{1}{p} \to +\infty \text{ , for all } 0 < p < +\infty.}
+
+    \item [(c)] Let $\clc$, be the $\C$-valued continuous functions on $\R$ with compact support, equipped with the sup norm $\|.\|_\infty$. Then for $1 \leq p < \infty$, fix $f \in \loc$, and define 
+    \qeq{\ell_f(\phi) := \int f\phi \,d\mu \text{ , for } \phi \in \clc. \label{eq:3}}
+
+    \textbf{Claim. } The integral in \eqref{eq:3} is well defined and yields a linear functional on $\clc$.
+
+    \begin{proof}
+        To show that $\ell_f$ is well defined, we must show that $\ell_f(\phi) < +\infty$ for all $f$ and $\phi$. To do this, for $1 \leq q < +\infty$ such that $1 = \frac{1}{p} + \frac{1}{q}$, observe that
+        \eq{\ell_f(\phi) \leq \int |f \phi|\,d\mu = \int_K |f \phi|\,d\mu \leq \|f\chi_K\|_p \|\phi\|_q < +\infty.}
+        For the above, $K$ is the compact support of $\phi$, meaning $|f\phi|$ is supported on $K$, so the equality holds. The second inequality comes from holder. For the final inequality, the first factor is finite because $f \in \loc$, which by (a) implies $f\chi_K \in \elp$. The second factor is finite because $\phi \in \clc$. This shows well-definedness of $\ell_f$.
+
+        Additionally, we know $\ell_f$ maps to $\R$ and not $\overline{\R}$ by the above, so $\ell_f$ is a linear functional if it is linear. But linearity of $\ell_f$ follows quite simply from linearity of the integral.
+    \end{proof}
+
+    \item [(d)] \textbf{Claim. }
+    \qeq{\ell_f (\phi) = 0 \text{ , for all } \phi \in \clc \label{eq:4}}
+    implies that $f = 0$, $\mu$-a.e.
+
+    \begin{proof}
+        We will prove this by contradiction, assuming that $\mu(\{f(x) \neq 0\}) > 0.$ Furthermore, assume without loss of generality that $\mu(\{f(x) > 0\}) > 0$, and that this measure is finite, as if not, then clearly \eqref{eq:4} is false. Then take $R > 0$ such that $\{f > 0\} \subseteq [-R, R] =: A$.
+
+        Using the polar representation of $\C$-valued measurable functions, we know that there exists $h : \R \to \C$ with $|h| = 1$ such that $f = |f| \cdot h$, or equivalently, $|f| = \frac{1}{h} f$. Then define $\phi = \frac{1}{h} \chi_A$, and $0 < q < +\infty$ such that $1 = \frac{1}{p} + \frac{1}{q}$. Then $\phi \in \mathcal{L}^q(\mu)$, and we know $\clc$ is dense in $\mathcal{L}^q(\mu)$, so there exists $\phi' \in \clc$ such that for $\epsilon > 0$,
+        \qeq{\|\phi - \phi'\|_q < \epsilon.\label{eq:5}}
+
+        From here, we have for the same $\epsilon > 0$, that
+        \qal{0 < \int f \,d\mu \leq \int f \chi_A \,d\mu &\leq \int |f| \chi_A \,d\mu \label{eq:6}\\
+        &\leq \int |f \phi| \,d\mu \label{eq:7}\\
+        &\leq \int |f(\phi - \phi' + \phi')| \,d\mu \nonumber \\
+        &\leq \int |f(\phi-\phi')| \,d\mu + \int |f \phi'| \,d\mu \label{eq:8}\\
+        &\leq \|f\|_p \|\phi - \phi'\|_q <\|f\|_p \cdot \epsilon. \label{eq:9}}
+        For above, the second inequality in \eqref{eq:6} follows because $f$ is positive only on $A$. \newline \eqref{eq:7} follows from the definition of $\phi$ and that $|h| = 1$. The first inequality in \eqref{eq:9} comes from holder and that the second term of \eqref{eq:8} is 0 by \eqref{eq:4}. The final inequality comes from \eqref{eq:5}.
+
+        Overall, this is a contradiction, because if $\int f \,d\mu < \|f\|_p \cdot \epsilon$ for all $\epsilon > 0$, then $\int f \,d\mu = 0$, but $\int f \,d\mu > 0$.
+    \end{proof}
+\end{itemize}
+
+\subsection*{Additional Problem 2}
+
+\begin{itemize}
+    \item [(a)] \textbf{Claim. } Let $K \subseteq \R$ be compact. Then $\mathcal{C}_c(K)$, the space of continuous complex valued functions on $K$, is a Banach space with respect to the supremum norm.
+    
+    \begin{proof}
+        We must first verify that the supremum norm acts as a norm on this space. Positive definiteness, homogeneity, and the triangle inequality all follow easily from the definition of the supremum norm. Also, for all $f \in \mathcal{C}_c(K)$, because $f$ is continuous and defined on a compact set, the extreme value theorem tells us that $f$ has a max and min. Therefore $\|f\|_\infty < +\infty$, so $\|.\|_\infty$ is indeed a norm on our space.
+
+        To see that this is a Banach space, recall that a sequence being uniformly Cauchy implies that it is uniformly convergent. Therefore for $(f_n)$, where $f_n \in \mathcal{C}_c(K)$, if $(f_n)$ is cauchy in $\|.\|_\infty$, then it is uniformly cauchy. Therefore it is uniformly convergent to some function $f$. Recall as well that the uniform limit of a sequence of continuous functions is continuous, so $f$ is continuous. Therefore $f \in \mathcal{C}_c(K)$, so this is indeed a Banach space.
+    \end{proof}
+
+    \item [(b)] \textbf{Claim. } $\mathcal{C}_c(\R)$ is not a Banach space with respect to the supremum norm.
+    
+    \begin{proof}
+        Define the sequence of functions $(f_n)$ by
+        \eq{f_n(x) = e^{-x^2} \chi_{[-n, n]} + (1 - n(x - n))\chi_{(n, n+\frac{1}{n}]} + (1 + n(x + n))\chi_{[-n - \frac{1}{n}, -n)}.}
+        While it is not immediately obvious that these functions are continuous, the second and third terms serve to remove the discontinuity in the first term at $n$ and $-n$ by creating a ``steep" line from 1 to 0 at these points.
+
+        Then for $\epsilon > 0$, there exists $n \geq m \in \N$ such that $e^{-m^2} < \epsilon$ because $e^{-m^2} \to 0$. Then
+        \qal{\|f_m - f_n\|_\infty &= \|f_m - f_n\|_{\infty; [-m, m]^c} \label{eq:10}\\
+        &\leq \|f_m\|_{\infty; [-m, m]^c} + \|f_n\|_{\infty; [-m, m]^c} \nonumber\\
+        &\leq 2\epsilon. \nonumber}
+        For above, \eqref{eq:10} holds because on $[-m, m]$, both $f_m$ and $f_n$ evaluate to $e^{-x^2}$.
+
+        This means that $(f_n)$ is Cauchy in $\|.\|_\infty$, but $(f_n) \to e^{-x^2}$, which does not have compact support, so $\lim_{n \to \infty} f_n \notin \clc$. Therefore $\clc$ is not a banach space with respect to the supremum norm.
+    \end{proof}
+\end{itemize}
+
+\subsection*{Additional Problem 3}
+
+\begin{itemize}
+    \item [(a)] \textbf{Claim. } If $V$ and $W$ are both finite dimensional $\C$-vector spaces, then every linear map between $V$ and $W$ is bounded.
+    
+    \begin{proof}
+        For linear map $T : V \to W$, because all norms on finite dimensional vector spaces are equivalent, it suffices to show that $T$ is bounded in $\|.\|_1$. Then for $x \in V$, we know that
+        \eq{x = \sum_{i=1}^{N} c_i v_i \text{ , where } c_i \in \C \text{ , and } \mathcal{B} := \{v_1, \dots v_N\} \text{ form a basis of } V.}
+        From here, if we define $M := \max_{v_j \in \mathcal{B}} \|Tv_j\|_1$, then
+        \eq{\|Tx\|_1 \leq \sum_{i=1}^{N}|c_k| \|Tv_k\|_1 \leq N M \sum_{i=1}^{N} |c_i| = N M \|x\|_1.}
+        Notably, both $N$ and $M$ are independent of our choice of $x$, so $T$ is bounded.
+    \end{proof}
+
+    \item [(b)] Suppose $\mu$ is a finite Borel measure on $\R$, and take $f \in \mathcal{L}^\infty (\mu)$. Define the multiplication operator
+    \eq{T_f : \mathcal{L}^2(\mu) \to \mathcal{L}^2 (\mu) ~,~ T_f(\phi) = f \cdot \phi.}
+    We know already that $T_f$ is a bounded linear operator with
+    \qeq{\|T_f\phi\|_2 \leq \|f\|_\infty \|\phi\|_2 \text{ , for all } \phi \in \mathcal{L}^2 (\mu). \label{eq:11}}
+    \textbf{Claim. } The operator norm of $T_f$ has the value 
+    \eq{\|T_f\| = \|f\|_\infty.}
+
+    \begin{proof}
+        Using the definition of the operator norm, we have 
+        \eq{\|T_f\| = \sup_{\|\phi\|_2 \leq 1} \|T_f\phi\|_2 \leq \|f\|_\infty \|\phi\|_2 \leq \|f\|_\infty.}
+        For above, the first inequality follows from \eqref{eq:11}, and the second from the above supremum being over $\|\phi\|_2 \leq 1$.
+
+        It remains to show $\|T_f\| \geq \|f\|_\infty$. To do so, for $\epsilon > 0$, define
+        \eq{A := \{f(x) > \|f\|_\infty - \epsilon\}.} Then $A$ is measurable, and $\mu(A) > 0$ as shown in set 7. Then define 
+        \eq{\phi = \frac{\chi_A}{\sqrt{\mu(A)}}.} By this definition, $\phi \in \mathcal{L}^2 (\mu)$ with $\|\phi\|_2 = 1$. Thus
+        \qal{\|T_f\| = \sup_{\|\varphi\|_2 \leq 1} \|T_f \varphi\|_2 \geq \|T_f\phi\|_2 &= \|f \phi \|_2 \nonumber \\
+            &= \left(\int |f\phi|^2\,d\mu\right)^\frac{1}{2} \nonumber \\
+            &\geq \left(\int_A |f\phi|^2\,d\mu\right)^\frac{1}{2} \nonumber \\
+            &\geq \left( (\|f\|_\infty - \epsilon)^2 \int_A |\phi|^2\,d\mu\right)^\frac{1}{2} \label{eq:12} \\
+            &= \|f\|_\infty - \epsilon. \label{eq:13}}
+            For above, \eqref{eq:12} holds because our definition of $A$, and \eqref{eq:13} holds because $\|\phi\|_2 = 1$, and $\phi$ is supported only on $A$.
+
+            Therefore we conclude $\|T_f\| = \|f\|_\infty$.
+    \end{proof}
+\end{itemize}
+
+\subsection*{Additional Problem 4}
+
+For the Banach space $(X, \|.\|_X)$, we denote $\mathcal{B}(x) := \mathcal{B}(X, X)$, the vector space of bounded linear operators on $X$ with respect to the operator norm. Then the identity operator $I : X \to X$, $I(x) = x$ is a bounded linear operator which is invertible.
+
+\begin{itemize}
+    \item [(a)] \textbf{Claim. } For $T, S \in \mathcal{B}(X)$, one has the composition $TS \in \mathcal{B}(x)$ with 
+    \eq{\|TS\| \leq \|T\| \|S\|.}
+
+    \begin{proof}
+        Because both $T$ and $S$ are bounded operators, we have 
+        \eq{\|Tx\|_x \leq \|T\| \|x\|_x \text{ , and } \|S_x\|_x \leq \|S\| \|x\|_x.}
+        With this, we can say
+        \al{\|TS\| &= \sup_{\|x\| \leq 1} \|TSx\|_X \\
+                   &\leq \sup_{\|x\| \leq 1} \|T\| \|Sx\|_X \\
+                   &\leq \sup_{\|x\| \leq 1} \|T\| \|S\| \|x\|_X \\
+                   &\leq \|T\|\|S\|}
+    \end{proof}
+    \item [(c)] Let $P \in \mathcal{B}(X)$ be given with $\|P\| < 1$. Then defined
+    \eq{T := I - P \in \mathcal{B}(X).}
+
+    \textbf{Claim. } $T$ is invertible, or equivalently, there exists $S \in \mathcal{B}(X)$ such that $TS = ST = I$.
+
+    \begin{proof}
+        To begin, define 
+        \eq{S := \sum_{n=0}^{\infty} P^n.}
+        We know $\|P\| < 1$, so we have
+        \eq{\sum_{n=0}^{\infty} \|P\|^n < +\infty.}
+        Then by result 6.41, we have $S < +\infty$, so $S \in \mathcal{B}(X)$. Computing $TS$, with the computation of $ST$ being very similar, we have
+        \eq{TS = \sum_{n=0}^{\infty} P^n - P \sum_{n=0}^{\infty} P^n = P^0 = I.}
+    \end{proof}
+\end{itemize}
+\end{document}
