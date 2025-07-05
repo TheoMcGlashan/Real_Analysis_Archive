@@ -1,0 +1,42 @@
+\documentclass[12pt]{amsart}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eq}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\al}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\qeq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\qal}[1]{\begin{align}#1\end{align}}
+\title{Keyword document week 10}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+
+\subsection*{Pythagorean Theorem}
+
+Suppose $f$ and $g$ are orthogonal elements of an inner product space. Then
+\eq{\|f+g\|^2 = \|f\|^2 + \|g\|^2.}
+
+I feel like I don't really have to justify why this one's relevant. Seeing it after using the triangle inequality so often does convince me even more that it's useful, as it gives us equality instead of an inequality if we square all terms and have orthogonal vectors, which are not that hard requirements to meet. There are many proofs for the Pythagorean theorem, but the one for this more generalized version in the book is very easy once we have definitions and properties of the inner product. This result is on page 217.
+
+\subsection*{Cauchy-Schwarz inequality}
+
+Suppose $f$ and $g$ are elements of an inner product space. Then
+\eq{|\langle f, g \rangle| \leq \|f\|\|g\|,}
+with equality if and only if one of $f$, $g$ is a scalar multiple of the other.
+
+This is another one that is a very widely known theorem. There are no requirements on $f$ or $g$ other than them being in our inner product space, and because taking the absolute value of $\langle f, g \rangle$ can only increase it, we do not even need the absolute value. This means we can apply this theorem extremely easily. It is used to prove the triangle inequality, which is perhaps the most useful inequality in analysis. It is on page 218.
+
+\subsection*{Key Technique}
+
+While reading through the proofs for these sections, the majority of the times I got confused or had to reread parts had to do with the usage of the definition of the inner product and the norm induced by the inner product. I ended up rereading both definitions several times, as the inner product was used much in these sections. The proof for the Cauchy-Schwarz inequality in particular made me examine the inner product definition and it's properties. Going forward, having all the properties of the inner product memorized will probably save a lot of time.
+
+\end{document}

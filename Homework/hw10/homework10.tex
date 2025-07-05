@@ -1,0 +1,190 @@
+\documentclass[12pt]{amsart}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eq}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\al}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\qeq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\qal}[1]{\begin{align}#1\end{align}}
+\title{Problem Set 10}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+\newpage
+\
+\newpage
+
+\subsection*{Additional Problem 1}
+
+\begin{itemize}
+    \item [(a)] The collection $\{x_n ~,~ n \in \N_0\}$ is linearly independent in $L^2([-1, 1]; dx)$.
+    
+    \begin{proof}
+        First note that for $f, g \in L^2([-1, 1]; dx)$, we have $f = g$ Lebesgue a.e. implies that $f = g$ on some dense subset of $[-1, 1]$. This is because if this was false, there would be an interval in $[-1, 1]$ where $f \neq g$. This interval would have positive measure, meaning that $f \neq g$ Lebesgue a.e.
+
+        Then let $a_0x^0 + a_1x^1 + \dots + a_nx^n$ be a linear combination of elements of our collection. Setting this equal to 0, we have the polynomial
+        \eq{0 = a_0x^0 + a_1x^1 + \dots + a_nx^n}
+        which we know can have at most $n$ roots if one of it's coefficients is nonzero. However, for $f := a_0x^0 + a_1x^1 + \dots + a_nx^n$ to be equal to $0$, it would need to equal 0 on a dense subset of its possible inputs. Because it can be 0 at at most $n$ inputs, our collection is linearly independent.
+    \end{proof}
+
+    \item[(b)] To construct an ONS from $\{1, x, x^2, x^3\}$ in $L^2([-1, 1]; dx)$, first let $v_1 = 1$. Then
+    \eq{v_2 = \frac{x - P_{\text{span}\{1\}}(x)}{\| x - P_{\text{span}\{1\}}(x) \|}.}
+    To compute this, first compute
+    \eq{P_{\text{span} \{1\} (x)} = \langle x, 1 \rangle \cdot 1 = \int_{-1}^{1} x \cdot 1 \,dx = 0}
+    Then compute 
+    \eq{\|x\| = \left(\langle x, x \rangle\right)^\frac{1}{2} = \left( \int_{-1}^{1} x \cdot x \,dx\right) = \left( \frac{2}{3}\right)^\frac{1}{2}}
+    therefore
+    \eq{v_2 = \frac{x}{\sqrt{\frac{2}{3}}}.}
+
+    To compute $v_3$, first observe
+    \eq{v_3 = \frac{x^2 - P_{\text{span} \{1, x\}} (x^2)}{\| x^2 - P_{\text{span} \{1, x\}} (x^2) \|}.}
+    Then compute 
+    \eq{P_{\text{span} \{1, x\}} (x^2) = \langle x^2, 1\rangle 1 + \langle x^2, x \rangle x = \frac{2}{3} + 0.}
+    Then compute
+    \eq{\|x^2 - \frac{2}{3} \| = \left( \langle x^2 - \frac{2}{3}, x^2 - \frac{2}{3} \rangle\right)^\frac{1}{2} = \left( \int_{-1}^{1} (x^2 - \frac{2}{3})^2 \,dx\right)^\frac{1}{2} = \sqrt{\frac{26}{9}}.}
+    Therefore
+    \eq{v_3 = \frac{x^2 - \frac{2}{3}}{\sqrt{\frac{26}{9}}}.}
+    
+    To compute $v_4$, first observe
+    \eq{v_4 = \frac{x^3 - P_{\text{span} \{ 1, x, x^2\}} (x^3)}{ \| x^3 - P_{\text{span} \{ 1, x, x^2\}} (x^3) \|}.}
+    Then compute
+    \eq{P_{\text{span} \{ 1, x, x^2\}} (x^3) = \langle x^3, 1\rangle 1 + \langle x^3, x\rangle x + \langle x^3, x^2 \rangle x^2 = \int_{-1}^{1} x^4 \,dx = \frac{2}{5}.}
+    Then compute 
+    \eq{\|x^3 - \frac{2}{5} \| = \left( \int_{-1}^{1} x^6 - \frac{4}{5} x^3 + \frac{4}{25} \,dx\right)^\frac{1}{2} = \left(\frac{2}{7} + \frac{8}{25}\right)^\frac{1}{2} = \sqrt{\frac{116}{125}}.}
+    Therefore
+    \eq{v_4 = \frac{x^3 - \frac{2}{5}}{\sqrt{\frac{116}{175}}}.}
+
+    \item[(c)] Applying Gram-Schmidt on $\{x^n : n \in \N\}$ yields an ONS called the \textbf{Legendre polynomials}. These polynomials form an ONB of $L^2([-1, 1]; dx)$.
+    \begin{proof}
+        To begin, we know that the classical Weierstrass theorem states that for $f \in \mathcal{C}([-1, 1])$, there exists a sequence of polynomial $p_n$ such that $p_n \to f$ uniformly. Because Gram-Schmidt preserves the span of a collection, and our collection $\{x^n : n \in \N\}$ spans all polynomial, the Legendre polynomials span all polynomials. Therefore we can approximate any continuous $f$ in $[-1, 1]$ by Legendre polynomials.
+
+        Furthermore, we know that we can approximate any function $g \in L^2([-1, 1]; dx)$ by a continuous function in $[-1, 1]$. Therefore by first approximating $g$ with a continuous function, then approximating that continuous function with our Legendre polynomials, we can approximate any element of $L^2([-1, 1]; dx)$ with a sequence of these polynomials. This means
+        \eq{\overline{\text{span \{legendre polynomials\}}} = L^2([-1, 1]; dx).}
+        We already know the Legendre polynomials are an ONS, so they are then an ONB.
+    \end{proof}
+\end{itemize}
+
+\subsection*{8B.16} \hfill
+
+Suppose that $V$ is a Hilbert space and $P: V \to V$ is a linear map such that $P^2 = P$ and $\|Pf\| \leq \|f\|$ for every $f \in V$. Then there exists a closed subspace $U$ of $V$ such that $P = P_U$.
+
+\begin{proof}
+    Our candidate for $U$ is Ran$P$. Then Ran$P$ is a subspace because for $x_1, x_2 \in$ Ran $P$, there exists $y_1, y_2$ such that $P_{y_1} = x_1$, and $P_{y_2} = x_2$. Then
+    \eq{ax_1 + x_2 = aP_{y_1} + P_{y_2} = P(ay_1 + y_2) \in \text{Ran}P.}
+
+    Then we want to show that for $v \in V$, we can represent $v$ as $v = P_v + (v-P_v) = P_Uv$, where $Pv \in$ Ran$P$ and $(v-Pv) \in$ (Ran$P)^\bot$. To do this, observe
+    first define $w := v - Pv$ and take $u \in$ Ran$P$. Then 
+    \al{\|w - tu\|^2 &= \|w\|^2 -2tRe\langle w, u\rangle + t^2 \|u\|^2, \\
+        \|P(w-tu) \|^2 &= t^2 \|u\|^2 \\
+        \implies t^2 \|u\|^2 &\leq \|w\|^2 - 2tRe \langle w, u \rangle + t^2 \|u\|^2 \\
+        \implies 0 &\leq \|w\|^2 - 2t Re \langle w, u \rangle ~,~ t \in \R. \\
+        \implies Re \langle w, u \rangle &= 0.}
+
+    A similar argument follows for $Im\langle w, u \rangle$. This tells us that $\langle w, u \rangle = 0$ for all $u \in U$. Therefore $v - Pv \in$ (Ran $P)^\bot$.
+\end{proof}
+
+\subsection*{8C.13}
+
+\begin{itemize}
+    \item [(c)] The Banach space $\ell^\infty$ is not separable.
+    
+    \begin{proof}
+        Assuming that this space is separable, then there exists a countable dense subset $\{x_n : n \in \N\}$ of the space. Then for $\epsilon > 0$, we can define an $\epsilon$-ball around each point as
+        \eq{B_\epsilon := \{y \in \ell_\infty : \|x_n - y \|_\infty < \epsilon\}.}
+        Furthermore, density of these $x_n$ gives us
+        \eq{\ell^\infty = \bigcup_{n \in \N} = B_\epsilon(x_n).}
+
+        Now examine sequences in $\ell^\infty$ made of $0's$ and $1's$. We know there are uncountably many of these sequences, so there must be at least two different ones of them in at least one of our countably many $\epsilon$-balls. But if these sequences differ, then the sup norm of their difference is 1, as they are sequences over 1 and 0. But then if $\epsilon < \frac{1}{2}$, then we have a contradiction because of the way we defined our $\epsilon$-balls.
+    \end{proof}
+\end{itemize}
+
+\subsection*{8C.16}
+
+Find the polynomial of degree at most 4 that minimizes $\int_{0}^{1} |x^5 - g(x)|^2\,dx$.
+
+\begin{proof}
+    First define
+    \eq{U := \text{span} \{ 1, x, x^2, x^3, x^4\}.}
+
+    Then
+    \eq{\|P_U(x^5) \| = \inf_{g \in U} \|x^5 - g\|}
+
+    This tells us that we need to calculate $P_U(x^5)$.
+    \eq{P_U(x^5) = \sum_{n=0}^{4} \langle x^5, x^n\rangle x^n = \sum_{n=0}^{4} \int_{0}^{1} x^5 \cdot x^n \,dx = \frac{1}{6} + \frac{x}{7} + \frac{x^2}{8} + \frac{x^3}{9} + \frac{x^4}{10}.}
+\end{proof}
+
+\subsection*{Additional Problem 2}
+
+Let $\mathscr{H}$ be a Hilbert space. Suppose that $A \in \mathcal{B}(\mathscr{H})$. Then we have 
+\eq{\|A\| = \sup_{x, y \in \mathscr{H} : \|x\| = \|y\| = 1} |\langle Ax, y \rangle|.}
+
+\begin{proof}
+    We will prove this using double inequalities. First,
+    \eq{\sup_{x, y \in \mathscr{H} : \|x\| = \|y\| = 1} |\langle Ax, y \rangle| \leq \sup_{\|x\| = \|y\| = 1} \|Ax\| \cdot \|y\| \leq \sup_{\|x\| = \|y\| = 1}\|A\| \cdot \|x\| \cdot \|y\| = \|A\|.}
+    For the other direction,
+    \al{\sup_{\|x\| = \|y\| = 1} \|\langle Ax, y\rangle| &\geq \sup_{\|x\| = 1} |\langle Ax, \frac{Ax}{\|Ax\|} \rangle |}
+\end{proof}
+
+\subsection*{Additional Problem 3}
+
+For the Hilbert space $\mathscr{H}$, a map $B : \mathscr{H} \times \mathscr{H} \to \mathcal{C}$ is a \textbf{Sesquilinear form} if for all $x \in \mathscr{H}$, $B(., x)$ is linear and $B(x, .)$ is conjugate linear. A Sesquilinear form $B$ is bounded if there exists $C > 0$ such that for all $x, y \in \mathscr{H}$, one has
+    \qeq{|B(x, y)| \leq C \|x\| \|y\|. \label{eq:1}}
+
+\begin{itemize}
+    \item [(a)] Every bounded Sesquilinear form $B$ on $\mathscr{H}$ is represented by a unique bounded operator, i.e. there exists unique $A \in \mathcal{B}(\mathscr{H})$ such that 
+    \eq{B(x, y) = \langle x, Ay \rangle \text{ , for all } x, y \in \mathscr{H}.}
+    Furthermore,
+    \eq{\|A\| = \sup_{\|x\|=\|y\|=1} |B(x, y)| = \inf \{C > 0 : \eqref{eq:1} \text{ holds.}\}}
+    
+    \begin{proof}
+        Given a bounded Sesquilinear form $B$, first fix $y \in \mathscr{H}$. Then the map $B(x, y)$ is a bounded linear functional. Then by the Riesz representation theorem, we know that there exists unique $h_y$ such that $B(x, y) = \langle x, h_y\rangle$.
+
+        Now we want to show that the map $A : y \to h_y$ is bounded and linear. To show boundedness,
+        \eq{\|A_y \| = \|h_y\| = \|B(x, y)\| = \sup_{\|x\|= 1} \|B(x,y)\| \leq \sup_{\|x\| = 1} C\|x\| \|y\| = C\|y\|.}
+        To show linearity,
+        \eq{\langle x, h_{y_1} + h_{y_2} \rangle = B(x, h_{y_1} + h_{y_2}) = B(x, h_{y_1}) + B(x, h_{y_2}) = \langle x, h_{y_1} \rangle + \langle x, h_{y_2}\rangle.}
+
+        For the second part of the claim,
+        \eq{\|A\| = \sup_{\|y\| = 1} |Ay| = \sup_{\|y\| = \|x\| = 1} |\langle x, h_y \rangle| = \sup_{\|y\|= \|x\| = 1} |B(x, y)|}
+    \end{proof}
+
+    \item [(b)] For $A \in \mathcal{B}\mathscr{H}$, consider the Sesquilinear form
+    \eq{B_A (x, y) := \langle Ax, y \rangle , x, y \in \mathscr{H}.}
+    This is a bounded Sesquilinear form, and therefore can be represented by a unique bounded operator $A^*$. Additionally,
+    \eq{\|A\| = \|A^*\|.}
+
+    \begin{proof}
+        To show the claim, we have
+        \eq{\|A\| = \sup_{\|x\| = 1} \|A_x\| = \sup_{ \|x\| = \|y\| = 1} |\langle Ax, y\rangle| = \sup_{ \|x\| = \|y\| = 1} \langle x, A^*y \rangle| = \sup_{\|x\| = 1} \|A^*x\| = \|A^*\|.}
+    \end{proof}
+
+    \item [(c)] Let $A, B \in \mathscr{H}$, then for all $ \alpha \in \mathcal{C}$,
+    \eq{(A + B)^* = A^* + B^*, (\alpha A^*) = \overline{\alpha} A^* , [A^*]^* = A.}
+
+    \begin{proof}
+        For the first part of this claim, $(A+B)^*$ has the defining property
+        \eq{\langle (A+B)x, y \rangle = \langle x, (A+B)^*y \rangle, \text{ for all } x, y \in \mathscr{H}.}
+        Then by linearity of the inner product, we know that 
+        \eq{A\langle x, y \rangle + B \langle x, y\rangle = \langle x, A^*y \rangle + \langle x, B^*y \rangle.}
+        This implies that $(A + B)^* = A^* + B^*$.
+    \end{proof}
+
+    \item [(d)]
+    
+    \eq{\text{Ker}(A^*) = [\overline{\text{Ran} (A)}]^\bot.}
+
+    \begin{proof}
+        \eq{\text{Ker}(A^*) = }
+    \end{proof}
+\end{itemize}
+\end{document}

@@ -1,0 +1,232 @@
+\documentclass[12pt]{amsart}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eq}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\al}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\qeq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\qal}[1]{\begin{align}#1\end{align}}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+\renewcommand{\-}[1]{\overline{#1}}
+\title{Problem Set 9}
+\author{Theo McGlashan}
+\date{}
+\onehalfspacing
+\begin{document}
+\maketitle
+
+\begin{center}
+    I adhered to the honor code on this assignment.
+\end{center}
+
+\newpage
+\
+\newpage
+
+\subsection*{Additional Problem 1}
+
+\begin{itemize}
+    \item [(a)]
+    
+    $Claim.~$ For the space $(\mathcal{C}(K), \|.\|_\infty)$, where $K$ is a compact subset of $\C^N$, closed and bounded subsets of this space need not be compact.
+
+\begin{proof}
+    We will show that the set $F := \{f \in \mathcal{C}([-1, 1]) : \|f\|_\infty \leq 1\}$ is not compact, despite being closed and bounded.
+
+    To begin, let $(f_n)$ be a sequence in $\mathcal{C}([-1, 1])$ defined by 
+    \eq{f_n : [-1, 1] \to \R, ~ f_n(x) = \begin{cases}
+        1 - n|x| &\text{ , if } |x| \leq \frac{1}{n} \\
+        0 &\text{ , otherwise.}
+    \end{cases}}
+    This function can only take values in $[0,1]$, so it is bounded in sup norm by 1, so it is in $F$.
+    Additionally, this sequence converges pointwise to $\chi_{\{0\}}$. As proof, take $x \in [-1, 1]$. 
+    
+    If $x = 0$, then $f_n(x) = 1$ for all $n$. 
+    
+    If $x \neq 0$, then take $n \in \N$ such that $\frac{1}{n} < |x|$. Then $f_n(x) = 0$ for this $n$. \newline
+    The pointwise convergence of $(f_n)$ implies that any uniformly convergent (or pointwise convergent) subsequence of $(f_n)$ must also converge to $\chi_{\{0\}}$. The function $\chi_{\{0\}}$ is not continuous, so it is not in $\mathcal{C}([-1, 1])$, meaning that $F$ is not compact.
+\end{proof}
+
+    \item [(b)]
+    
+    A family $\mathcal{F}$ of functions is \textbf{Equicontinuous} if for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $f \in \mathcal{F}$, one has 
+    \eq{|f(x) - f(y)| < \epsilon \text{ , whenever } \|x - y\| < \delta.}
+
+    This definition differs from uniform continuity because uniform continuity is a property of only one function $f$. Equicontinuity gives a value of $\delta$ that works for all $f \in \mathcal{F}$, whereas for uniform continuity, the value for $\delta$ is specific to one function.
+
+    To show for $(f_n)$ from (a) that the family $\{f_n : n \in \N\}$ is not equicontinuous, first let $1 > epsilon > 0$, then fix $\delta > 0$. Then for 
+    \eq{\|x - y \| < \delta \text{ , where } x = 0,}
+    for $f_n$ where $\frac{1}{n} < \|x - y\|$, we have 
+    \eq{|f_n(x) - f_n(y)| = |1 - 0| = 1.}
+    Therefore $\{f_n : n \in \N\}$ is not equicontinuous.
+
+    \item [(c)]
+    
+        \textbf{Theorem.} $\mathcal{F}$ is compact in $(\mathcal{C}(K), \|.\|_\infty)$ if and only if $\mathcal{F}$ is closed, bounded, and equicontinuous.
+
+        \begin{proof}
+            compactness implies closedness and boundedness in a metric space, so one direction of this is trivial.
+
+            For the remaining direction, it suffices to show that given an arbitrary sequence $(f_n)$ in $\mathcal{F}$, there exists a uniformly convergent subsequence $(g_n)$ of $(f_n)$ with limit in $\mathcal{F}$.
+
+            \textbf{(i)} ~Since $(\Q + i\Q)^N$ is dense in $\C^N$, $K$ has a dense countable subset \eq{D := \{x_k~,~ k \in \N\}.}
+            
+            Let $(f_n)$ be an arbitrary sequence in $\mathcal{F}$. Then for $x_1 \in D$, the sequence $(f_n(x))$ is a bounded sequence in \textbf{F}, so by Bolzano-Weierstrass, there exists a convergent subsequence $(f_{1, k}(x_1))$.
+
+            Then construct the sequence $(f_{1, k}(x_2))$, also bounded in \textbf{F}. Once again, Bolzano-Weierstrass gives us a convergent subsequence $(f_{2, k}(x_2))$. Note that because each $f_k \in (f_{2, k})$ is also in $(f_{1,k})$, we know $(f_{2, k} (x_1))$ converges.
+
+            Repeating this process gives convergent subsequences $(f_{j,k}(x_j))$ for all $j \in \N$. Notably, $(f_{j,k})$ is a subsequence of $(f_n)$ where $(f_{j, k}(x_i))$ converges for $i \leq j$.
+
+            We finally define the subsequence $(g_n)$ of $(f_n)$ by
+            \eq{g_n := f_{n, n}.}
+            Then for $x_m \in D$, we know $(f_{n, k} (x_m))_{k \in \N}$ is a convergent sequence in \textbf{F} when $n \geq m$. Therefore $ g_n(x_m) = (f_{n, n} (x_m))_{n \in \N}$ convergess, so $g_n$ converges pointwise for points in $D$.
+
+            \textbf{(ii)}~ Our space $(\mathcal{C}(K), \|.\|_\infty)$ is a banach space, so it suffices to show $(g_n)$ is uniformly Cauchy. To do so, begin by letting $\epsilon > 0$. Then because $\mathcal{F}$ is equicontinuous, there exists $\delta > 0$ such that for all $n \in \N$, 
+            \qeq{|f_n(x) - f_n(y)| < \epsilon \text{ , when } \|x - y \| < \delta. \label{eq:1}}
+            Because $D$ is dense in $K$, we have
+            \eq{K \subseteq \bigcup_{x \in D} B_\delta (x).}
+            This is an open cover of $K$, and because $K$ is compact, there exists a finite subcover of $K$: 
+            \eq{x_1, \dots x_j \in D \text{ such that } K \subseteq \bigcup_{i=1}^j B_\delta(x_i).}
+            Because $(g_n)$ is convergent on $D$, it is Cauchy on $D$. Therefore for all $x_i \in x_1, \dots, x_j$, there exists $N_i \in \N$ such that
+            \qeq{|g_n(x_i) - g_m(x_i)| < \epsilon \text{ , for $n, m \geq N$.} \label{eq:2}}
+            Because $x_1, \dots, x_j$ is a finite collection, we can define $N := \max \{N_i : 1 \leq i \leq j\}$.
+            
+            Then take $x \in K$. By above, there exists $x_i \in x_1, \dots, x_j$ such that $x \in B_\delta(x_k)$. Then for $n, m \geq N$,
+            \qal{|g_n(x) - g_m(x)| &= |g_n(x) - g_n(x_i) + g_n(x_i) - g_m(x_i) + g_m(x_i) - g_m(x)| \nonumber \\
+            &\leq |g_n(x) - g_n(x_i)| + |g_n(x_i) - g_m(x_i)| + |g_m(x_i) - g_m(x)| \label{eq:3} \\
+            &< 3 \epsilon \nonumber}
+            For above, the first and third term of \eqref{eq:3} are each bounded by $\epsilon$ by \eqref{eq:1}, as $\|x - x_i\| < \delta$. The second term is bounded by $\epsilon$ by \eqref{eq:2}, as $x_i \in x_1, \dots x_j$.
+
+            We conclude then that $(g_n)$ is uniformly Cauchy, and therefore uniformly convergent in $\mathcal{F}$
+        \end{proof}
+    \end{itemize}
+
+    \subsection{8A.14}
+
+    We want to prove the statement
+    \eq{\< f, g \> = \frac{\|f + g \|^2 - \|f - g\|^2 + \|f+ig\|^2 - \|f-ig\|^2}{4}.}
+    We will begin by splitting the right side of above into the imaginary terms and the real terms. For the real terms,
+    \qal{\|f + g\|^2 - \|f-g\|^2 &= \<f+g, f+g\> - \<f-g, f-g\> \nonumber \\
+        &= \<f, f+g\> + \<g, f+g\> - \<f, f-g\> + \<g, f-g\> \label{eq:4}\\
+        &= \-{\<f+g, f\>} + \-{\<f+g, g\>} - \-{\<f-g, f\>} + \-{\<f-g, g\>} \label{eq:5}\\
+        &= \-{\<f, f\>} + \-{\<g, f\>} + \-{\<f, g\>} + \-{\<g, g\>} - \-{\<f,f\>} +\-{\<g,f\>} + \-{\<f,g\>} - \-{\<g,g\>} \label{eq:6}\\
+        &= 4 Re \<f, g\>. \label{eq:7}}
+    For above, \eqref{eq:4} and \eqref{eq:6} come from linearity in the first slot of an inner product. \eqref{eq:5} comes from conjugate symmetry of the inner product. \eqref{eq:7} comes from the fact that $\<f, g\> + \-{\<f, g\>} = 2 Re \<f, g\>$, or equivalently that $\-{\<f, g\>} + \-{\<g, f\>} = 2 Re \<f, g\>$.
+
+    The proof of the imaginary terms is similar:
+    \al{&\hspace{1.2em}\|f + ig\|^2i - \|f-ig\|^2i \\ &= i(\<f+ig, f+ig\> - \<f-ig, f-ig\>) \\
+        &= i\big[\<f, f+ig\> + \<ig, f+ig\> - \<f, f-ig\> + \<ig, f-ig\>\big] \\
+        &= i\big[\-{\<f+ig, f\>} + \-{\<f+ig, ig\>} - \-{\<f-ig, f\>} + \-{\<f-ig, ig\>}\big] \\
+        &= i\big[\-{\<f, f\>} + \-{\<ig, f\>} + \-{\<f, ig\>} + \-{\<ig, ig\>} - \-{\<f,f\>} +\-{\<ig,f\>} + \-{\<f,ig\>} - \-{\<ig,ig\>}\big] \\
+        &= i \big[ -4 Re i \<f, g\> \big] = 4 Im\<f, g\> i}
+    The main thing to note for the imaginary terms is that the conjugate of $i$, $\-{i} = -i$.
+
+    Combining both the real and imaginary parts, we have
+    \eq{4Re \<f, g\> + 4Im\<f, g\>i = 4\<f, g\>.}
+\subsection*{8A.16}
+
+$Claim.~$ If $V$ is a normed vector space whose norm $\|.\|$ satisfies the parallelogram equality, then there is an inner product $\<\cdot,\cdot\>$ on $V$ such that $\|f\| = \<f, f\>^\frac{1}{2}$ for all $f \in V$.
+
+\begin{proof}
+    We will define the candidate for an inner product as 
+    \eq{\<f, g\> := \frac{\|f+g\|^2 - \|f-g\|^2}{4},}
+    and prove that it satisfies the properties of an inner product.
+
+    \textbf{Positivity}
+    
+    $\<f, f\> = \frac{\|2f\|^2 - \|0\|^2}{4} = \|f\|^2$, which is nonnegative by properties of the norm.
+
+    \textbf{Definiteness}
+
+    Again because $\<f, f\> = \|f\|^2$, we know by properties of the norm that it is $0$ if and only if $f$ is 0.
+
+    \textbf{Linearity}
+
+    \qal{\<f+g, h\> &= \frac{1}{4}\big[ \|f+g+h\|^2 - \|f+g-h\|^2\big] \label{eq:11}\\
+        &= \frac{1}{4} \big[(2\|f+h\|^2 + 2\|g\|^2 - \|f+h-g\|^2) - ( 2\|f-h\|^2 +2\|g\|^2 - \|f-h-g\|^2)\big] \label{eq:8}\\
+        &=\frac{1}{4}\big[ 2\|f+h\|^2 - 2\|f - h\|^2 + \|f - h - g\|^2 - \|f + h - g\|^2\big] \nonumber\\
+        &=\frac{1}{4} \big[2\|f+h\|^2 - 2\|f - h\|^2 + (2\|g-h\|^2 + 2\|f\|^2 -\|g-h+f\|^2) \label{eq:9}\\
+        &\hspace{5em}-(2\|g+h\|^2 +2\|f\|^2 - \|f+g+h\|)\big] \nonumber\\
+        &= \frac{1}{4}\big[ 2\|f+h\|^2-2\|f-h\|^2+2\|g+h\|^2-2\|g-h\|^2 \nonumber\\
+        &\hspace{5em}-(\|f+g+h\|^2-\|f+g-h\|^2)\big] \nonumber \\
+        &= 2\<f, h\> + 2\<g, h\> - (2\|g+h\|^2 +2\|f\|^2 - \|f+g+h\|) \label{eq:10}}
+    For above, the parallelogram equality is used in \eqref{eq:8} and \eqref{eq:9}. The important part of this expansion is that in the parentheses of \eqref{eq:10} the first expansion of the inner product in \eqref{eq:11}. Therefore we can add it to both sides to get 
+    \eq{2\<f+g, h\> = \frac{2}{4} \big[\|f+g+h\|^2-\|f+g-h\|^2\big] = 2\<f,h\> +2\<g,h\>}
+
+    \textbf{Homogeneity}
+    
+    To begin, assume $\alpha \in \Z$. Then $\<\alpha f, g\> = \alpha \<f, g\>$ because you can use linearity to split the inner product into $\alpha$ terms of $\<f, g\>$.
+
+    Then assume $\alpha = \frac{1}{n}$ for $n \in \N$. Then 
+    \al{\<\frac{1}{n} f, g\> &= \frac{\|\frac{1}{n} f + g\|^2 - \|\frac{1}{n} f - g\|^2}{4} \\
+        &= \frac{\frac{1}{n^2} \|f+ng\|^2 - \frac{1}{n^2} \|f - ng\|^2}{4} \\
+        &=\frac{1}{n^2} \<f, ng\> = \frac{1}{n} \<f, g\>.}
+
+    This shows homogeneity for any $\alpha \in \Q$, as a number in $\Q$ can be represented by a number in $\Z$ plus $\frac{1}{n}$ for some $n \in \N$.
+
+    Now pick $\alpha \in \R$. Then there exists $(a_n)$, a sequence in $\Q$ such that $(a_n) \to \alpha$.
+
+    \qal{ \<\alpha f, g\> &= \frac{\|\alpha f + g\|^2 - \|\alpha f - g\|^2}{4} \nonumber\\
+    &= \frac{\|\lim a_n f + g\|^2 - \| \lim a_n f - g\|^2}{4} \nonumber\\
+    &= \lim_{n \to \infty} \frac{\|a_n f + g\|^2 - \|a_n f - g\|^2}{4} \label{eq:12}\\
+    &= \lim_{n \to \infty} \frac{a_n}{4} \big[ \|f+g\|^2 - \|f-g\|^2\big] \label{eq:13}\\
+    &= \lim_{n \to \infty} a_n \<f, g\> \nonumber \\
+    &= \alpha \<f, g\>. \nonumber}
+    For above, we can move the limit outside the norm in \eqref{eq:12} by continuity of the norm. In \eqref{eq:13}, we are able to move $a_n$ out of the norm because $a_n \in \Q$. 
+\end{proof}
+
+\subsection*{Additional Problem 3}
+
+\begin{itemize}
+    \item [(a)]
+    
+    $Claim.~$ For all $x \in [0, 1]$, we have
+    \eq{\sum_{k = 0}^n \binom{n}{k} x^k (1-x)^{n-k} = 1.}
+
+    \begin{proof}
+        By the binomial theorem, we know 
+        \eq{\sum_{k = 0}^n \binom{n}{k} x^k (1-x)^{n-k} = (x + (1-x))^n = 1^n = 1 \text{ , when } x \in [0,1].}
+    \end{proof}
+
+    \item [(b)]
+    $Claim.~$ For $f \in \mathcal{C}([0,1])$, let $(p_n)$ be defined as
+    \eq{p_n(x) := \sum_{k=0}^n \binom{n}{k}f\left(\frac{k}{n}\right) x^k(1-x)^{n-k}~,~ x \in [0,1].}
+    Then $\|p_n - f\|_\infty \to 0$ as $n \to \infty$.
+
+    This proof will use the identity 
+    \qeq{\sum_{k=0}^{n} \binom{n}{k} (k-nx)^2x^k(1-x)^{n-k} = nx(1-x) \text{ , for all } x \in [0,1]. \label{eq:15}}
+
+    \begin{proof}
+        Let $\epsilon > 0$. Because $f \in \mathcal{C}([0,1])$, $f$ is continuous on a compact domain, so $f$ is uniformly convergent. Then let $\delta > 0$ such that 
+        \qeq{|f(x) - f(y)| < \epsilon \text{ , for all } x, y \in [0,1] \text{ with } |x-y| < \delta. \label{eq:22}}
+        By the result of (a), for all $x \in [0,1]$, we have 
+        \qal{\|p_n(x) - f(x)| &= |p_n(x) - f(x) \cdot 1| \nonumber\\
+            &= \left|\sum_{k=0}^n \binom{n}{k}f\left(\frac{k}{n}\right) x^k(1-x)^{n-k} - f(x) \left(\sum_{k = 0}^n \binom{n}{k} x^k (1-x)^{n-k}\right)\right| \nonumber\\
+            &= \left| \sum_{k=0}^{n} \binom{n}{k} \left(f\left(\frac{k}{n}\right) - f(x)\right) x^k(1-x)^{n-k}\right| \label{eq:14}.}
+        We will now partition the sum over $k$ by distinguishing whether or not $k$ satisfies $|\frac{k}{n} - x | \geq \delta$. We will define
+        \eq{B_\delta := \{k \in \{0, \dots, n\} : |\frac{k}{n} - x| \geq \delta\}.}
+        Note that for $k \in B_\delta$, we have 
+        \qeq{1 \leq \frac{1}{\delta^2} \left(x - \frac{k}{n}\right)^2. \label{eq:21}}
+        Now we will examine the sum in \eqref{eq:14} for values of $k$ in $B_\delta$. In this case,
+        \qal{ \eqref{eq:14} &= \sum_{k \in B_\delta} 1 \cdot \binom{n}{k} \left|f\left(\frac{k}{n}\right)- f(x)\right|x^k(1-x)^{n-k} \label{eq:16}\\
+        &\leq \sum_{k \in B_\delta} \frac{1}{\delta^2} \left(x - \frac{k}{n}\right)^2 \cdot \binom{n}{k} \left|f\left(\frac{k}{n}\right)- f(x)\right|x^k(1-x)^{n-k} \label{eq:17}\\
+        &\leq \sum_{k \in B_\delta} \frac{1}{\delta^2} \left(x - \frac{k}{n}\right)^2 \cdot \binom{n}{k} 2\|f\|_\infty \cdot x^k(1-x)^{n-k} \nonumber\\
+        &= \frac{1}{\delta^2} \cdot \frac{1}{n^2}\|f\|_\infty \cdot \sum_{k \in B_\delta} \binom{n}{k} (k-nx)^2 x^k(1-x)^{n-k} \label{eq:18}\\
+        &= \frac{1}{\delta^2} \cdot \frac{1}{n^2}\|f\|_\infty \cdot nx(1-x) \label{eq:19}\\
+        &= \frac{1}{\delta^2} \cdot \frac{1}{n} \|f\|_\infty \cdot x(1-x) \label{eq:20}}
+        For above, the equality in \eqref{eq:16} holds because everything outside the absolute value is already nonnegative. \eqref{eq:17} comes from \eqref{eq:21}. \eqref{eq:18} involves pulling a $\frac{1}{n^2}$ out of $\left(x - \frac{k}{n}\right)^2$. \eqref{eq:19} comes from using the identity \eqref{eq:15}. Finally, \eqref{eq:20} converges uniformly over all $x \in [0,1]$ because $x(1-x)$ is bounded for $x \in [0,1]$, so there exists an $N \in \N$ such that \eq{\eqref{eq:20} < \epsilon \text{ , for all } n \geq \N \text{ and all } x \in [0,1].}
+
+        This handles \eqref{eq:14} for terms of the sum where $k \in B_\delta$. For $k \notin B_\delta$, note that inside the inner parentheses of \eqref{eq:14}, we have $f(\frac{k}{n}) - f(x)$, and because $k \notin B_\delta$, we know $|\frac{k}{n} - x | < \delta$. Then by \eqref{eq:22}, the quantity in the parentheses is bounded by $\epsilon$. The rest of \eqref{eq:14} inside the sum is finite when $x \in [0,1]$ by the results of (a), and this is a finite sum, so the terms of the sum in \eqref{eq:14} where $k \notin B_\delta$ are bounded by a factor of $\epsilon$.
+
+        Therefore the whole sum is bounded by a factor of $\epsilon$, meaning $\|p_n(x) - f(x)\|_\infty < \epsilon$, for sufficiently large $n$. We can bound the supremum norm here because we can take $n$ large enough to be a bound for all $x \in [0,1]$, as previously described. Therefore $\|p_n - f\| \to 0$.
+    \end{proof}
+\end{itemize}
+\end{document}
